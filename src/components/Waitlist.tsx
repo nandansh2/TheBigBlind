@@ -7,6 +7,8 @@ import GlobeBridge from "./GlobeBridge";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xpqvdaol";
 
+const ROLES = ["Founder", "Investor / VC", "Financial Institution"];
+
 type Status = "idle" | "submitting" | "success" | "error";
 
 export default function Waitlist() {
@@ -138,6 +140,32 @@ export default function Waitlist() {
                   required
                   className="w-full rounded-input bg-white/5 border border-line-dark px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-white/50 transition-colors"
                 />
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <span className="eyebrow text-white/50 text-[10px]">
+                  I Am A
+                </span>
+                <div
+                  role="radiogroup"
+                  aria-label="I am a"
+                  className="flex flex-wrap gap-2"
+                >
+                  {ROLES.map((role, i) => (
+                    <label key={role} className="cursor-pointer">
+                      <input
+                        type="radio"
+                        name="role"
+                        value={role}
+                        required={i === 0}
+                        className="peer sr-only"
+                      />
+                      <span className="block rounded-full border border-line-dark bg-white/5 px-4 py-2.5 text-sm text-white/70 transition-colors peer-checked:bg-white peer-checked:text-black peer-checked:border-white peer-focus-visible:outline peer-focus-visible:outline-1 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-white">
+                        {role}
+                      </span>
+                    </label>
+                  ))}
+                </div>
               </div>
 
               <button

@@ -60,7 +60,7 @@ export default function Hero() {
   });
   const exitEased = useTransform(exitProgress, [0, 0.4], [0, 1]);
   const bottomRadius = useTransform(exitEased, [0, 1], [0, 40]);
-  const insetWidth = useTransform(exitEased, [0, 1], ["100%", "90%"]);
+  const insetScale = useTransform(exitEased, [0, 1], [1, 0.9]);
 
   function handlePointerMove(e: React.PointerEvent<HTMLElement>) {
     if (e.pointerType !== "mouse") return;
@@ -70,19 +70,19 @@ export default function Hero() {
   }
 
   return (
-    <div className="bg-off-white">
+    <div className="relative bg-off-white">
       <motion.section
         id="top"
         ref={heroRef}
         onPointerMove={handlePointerMove}
         onPointerEnter={() => setHovering(true)}
         onPointerLeave={() => setHovering(false)}
-        className="relative bg-black min-h-[100svh] overflow-hidden flex flex-col items-center justify-center px-6 pt-32 pb-40 sm:pb-56 mx-auto"
+        className="relative bg-black min-h-[100svh] overflow-hidden flex flex-col items-center justify-center px-6 pt-32 pb-40 sm:pb-56 mx-auto will-change-transform"
         style={
           prefersReducedMotion
             ? {}
             : {
-                width: insetWidth,
+                scaleX: insetScale,
                 borderBottomLeftRadius: bottomRadius,
                 borderBottomRightRadius: bottomRadius,
               }
@@ -178,8 +178,6 @@ export default function Hero() {
           </motion.a>
         </div>
 
-        <GlassCard containerRef={heroRef} />
-
         <motion.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/50"
           initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0 }}
@@ -190,6 +188,8 @@ export default function Hero() {
           <span className="w-px h-8 bg-white/40 scroll-cue-line origin-top" />
         </motion.div>
       </motion.section>
+
+      <GlassCard containerRef={heroRef} />
     </div>
   );
 }
