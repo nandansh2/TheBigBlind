@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --black: #0a0a0a;
+  --black-2: #141414;
+  --off-white: #fafaf8;
+  --white: #ffffff;
+  --gray: #8a8a8a;
+  --gray-dim: #4a4a4a;
+  --line-dark: rgba(255, 255, 255, 0.14);
+  --line-light: rgba(0, 0, 0, 0.1);
+  --ease-signature: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--white);
+  background: var(--black);
+  font-family: var(--font-inter), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.eyebrow {
+  font-family: var(--font-plex-mono), monospace;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Glass nav */
+.glass-nav {
+  background: rgba(10, 10, 10, 0.34);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Glass playing card */
+.glass-card-face {
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.08)
+  );
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 40px 90px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(255, 255, 255, 0.04);
+}
+
+.glass-chip {
+  background: rgba(10, 10, 10, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Metallic headline text */
+.metallic-text {
+  background: linear-gradient(
+    115deg,
+    var(--gray) 0%,
+    var(--white) 25%,
+    var(--gray) 50%,
+    var(--white) 75%,
+    var(--gray) 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: metallic-sweep 8s linear infinite;
+}
+
+@keyframes metallic-sweep {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+/* Card specular sheen sweep */
+.sheen-sweep {
+  animation: sheen-move 6s ease-in-out infinite;
+}
+
+@keyframes sheen-move {
+  0%,
+  100% {
+    transform: translate(-30%, -30%) rotate(20deg);
+  }
+  50% {
+    transform: translate(30%, 30%) rotate(20deg);
+  }
+}
+
+/* Scroll cue pulse line */
+.scroll-cue-line {
+  animation: pulse-line 2.2s var(--ease-signature) infinite;
+}
+
+@keyframes pulse-line {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scaleY(0.6);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* Idle card bob */
+.card-bob {
+  animation: card-bob 5s ease-in-out infinite;
+}
+
+@keyframes card-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .metallic-text,
+  .sheen-sweep,
+  .scroll-cue-line,
+  .card-bob {
+    animation: none !important;
+  }
+}
