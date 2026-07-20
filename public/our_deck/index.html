@@ -32,6 +32,32 @@
     @keyframes bbRise{from{opacity:0;transform:translateY(60px);}to{opacity:1;transform:none;}}
     @keyframes bbScrollCue{0%,100%{transform:translateY(0);opacity:.9;}50%{transform:translateY(10px);opacity:.4;}}
     @keyframes bbSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+    /* Featured In — press logos. Text wordmarks render now; swapping in real
+       logo files means replacing the span contents with <img>, which inherits
+       the same grayscale treatment below. */
+    .bb-logo{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;
+      flex-shrink:0;height:76px;padding:0 34px;border:1px solid rgba(200,200,200,0.16);
+      border-radius:12px;background:rgba(255,255,255,0.035);color:#E8E8E8;
+      font-size:19px;font-weight:600;letter-spacing:0.01em;opacity:.72;
+      transition:opacity .3s ease,border-color .3s ease,background .3s ease;}
+    .bb-logo:hover{opacity:1;border-color:rgba(240,240,240,0.42);background:rgba(255,255,255,0.06);}
+    .bb-logo img{max-height:40px;max-width:150px;width:auto;height:auto;object-fit:contain;
+      filter:grayscale(1) brightness(0) invert(1);}
+    @media (max-width:768px){
+      .bb-logo{height:62px;padding:0 24px;font-size:16px;}
+      .bb-logo img{max-height:30px;max-width:112px;}
+    }
+    /* Gallery carousel */
+    .bb-gal-track{display:flex;gap:20px;width:max-content;animation:bbMarquee 55s linear infinite;}
+    .bb-gal-track:hover{animation-play-state:paused;}
+    .bb-gal-item{flex-shrink:0;width:clamp(260px,26vw,400px);aspect-ratio:4 / 3;border-radius:14px;
+      overflow:hidden;border:1px solid rgba(200,200,200,0.2);background:rgba(20,20,20,0.6);
+      position:relative;transition:transform .35s ease,border-color .35s ease;}
+    .bb-gal-item:hover{transform:translateY(-8px);border-color:rgba(240,240,240,0.5);}
+    .bb-gal-item img{width:100%;height:100%;object-fit:cover;display:block;}
+    .bb-gal-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+      justify-content:center;gap:10px;color:#6E6E6E;font-size:13px;letter-spacing:0.18em;
+      background:repeating-linear-gradient(45deg,rgba(255,255,255,0.018) 0 12px,transparent 12px 24px);}
   </style>
 </helmet>
 
@@ -49,6 +75,7 @@
     <a href="#top" style="display:flex;align-items:center;gap:10px;font-size:15px;letter-spacing:0.22em;font-weight:600;color:#FFFFFF;white-space:nowrap;">THE BIG <span style="color:#FFFFFF;">♠</span> BLIND</a>
     <div style="display:flex;align-items:center;gap:26px;font-size:14px;letter-spacing:0.08em;color:#A0A0A0;">
       <a href="#ecosystem" style="color:#A0A0A0;" style-hover="color:#FFFFFF;">ECOSYSTEM</a>
+      <a href="#gallery" style="color:#A0A0A0;" style-hover="color:#FFFFFF;">GALLERY</a>
       <a href="#journey" style="color:#A0A0A0;" style-hover="color:#FFFFFF;">JOURNEY</a>
       <a href="#media" style="color:#A0A0A0;" style-hover="color:#FFFFFF;">MEDIA</a>
       <a href="#pricing" style="color:#A0A0A0;" style-hover="color:#FFFFFF;">PRICING</a>
@@ -134,7 +161,7 @@
 
   <section style="position:relative;z-index:1;padding:110px 0;border-top:1px solid rgba(200,200,200,0.12);">
     <div data-reveal style="max-width:1240px;margin:0 auto;padding:0 32px;display:flex;align-items:baseline;gap:28px;flex-wrap:wrap;">
-      <span style="font-family:var(--font-serif-display),'Playfair Display',serif;font-weight:700;font-size:clamp(72px,9vw,140px);line-height:1;background:linear-gradient(110deg,#7c7c7c,#f4f4f4,#9a9a9a);-webkit-background-clip:text;background-clip:text;color:transparent;"><span ref="{{ counterRef }}">70</span>+</span>
+      <span style="font-family:var(--font-serif-display),'Playfair Display',serif;font-weight:700;font-size:clamp(72px,9vw,140px);line-height:1;background:linear-gradient(110deg,#7c7c7c,#f4f4f4,#9a9a9a);-webkit-background-clip:text;background-clip:text;color:transparent;"><span ref="{{ counterRef }}">200</span>+</span>
       <div style="display:flex;flex-direction:column;gap:8px;">
         <span style="font-size:22px;font-weight:500;color:#FFFFFF;">Extended Network and Partners</span>
         <span style="font-size:14px;letter-spacing:0.3em;color:#A8A8A8;">TRUSTED NETWORK &amp; PARTNERS</span>
@@ -183,7 +210,7 @@
           <div>— Ideal Validation &amp; Funding Ready</div>
           <div>— Funding Opportunities</div>
           <div>— Network &amp; Journey Support</div>
-          <div>— Freelancing &amp; Interns Pool</div>
+          <div>— 10,000+ Interns &amp; Vetted Freelancers</div>
           <div>— Big Blind Club Membership</div>
         </div>
       </div>
@@ -215,7 +242,22 @@
         </div>
       </div>
     </div>
-    <div data-reveal style="margin-top:60px;border:1px solid rgba(200,200,200,0.22);border-radius:14px;background:rgba(14,14,14,0.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:26px 40px;display:flex;align-items:center;gap:22px;overflow-x:auto;">
+    <div data-reveal style="margin-top:34px;border:1px solid rgba(212,0,61,0.42);border-radius:14px;background:rgba(22,22,22,0.65);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);padding:44px 48px;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;box-shadow:0 0 60px rgba(212,0,61,0.10);">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <span style="font-family:var(--font-serif-display),'Playfair Display',serif;font-weight:700;font-size:clamp(52px,7vw,96px);line-height:1;background:linear-gradient(110deg,#7c7c7c,#f4f4f4,#9a9a9a);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap;">10,000+</span>
+        <span style="font-size:13px;letter-spacing:0.24em;color:#A8A8A8;font-weight:600;">TALENT POOL</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <h3 style="margin:0;font-family:var(--font-serif-display),'Playfair Display',serif;font-size:clamp(26px,3vw,38px);font-weight:600;color:#FFFFFF;line-height:1.2;">Hiring Becomes Easy.</h3>
+        <p style="margin:0;font-size:17px;color:#A0A0A0;line-height:1.6;max-width:760px;">Founders who join the community get direct access to a rich pool of <span style="color:#FFFFFF;font-weight:500;">10,000+ interns from reputed colleges</span> and <span style="color:#FFFFFF;font-weight:500;">vetted freelancers</span> — ready to plug into your team from day one.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
+          <span style="border:1px solid rgba(200,200,200,0.3);border-radius:999px;padding:8px 20px;font-size:14px;color:#FFFFFF;background:rgba(20,20,20,0.5);">Reputed Colleges</span>
+          <span style="border:1px solid rgba(200,200,200,0.3);border-radius:999px;padding:8px 20px;font-size:14px;color:#FFFFFF;background:rgba(20,20,20,0.5);">Vetted Freelancers</span>
+          <span style="border:1px solid rgba(200,200,200,0.3);border-radius:999px;padding:8px 20px;font-size:14px;color:#FFFFFF;background:rgba(20,20,20,0.5);">Zero Sourcing Overhead</span>
+        </div>
+      </div>
+    </div>
+    <div data-reveal style="margin-top:34px;border:1px solid rgba(200,200,200,0.22);border-radius:14px;background:rgba(14,14,14,0.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:26px 40px;display:flex;align-items:center;gap:22px;overflow-x:auto;">
       <span style="font-size:13px;letter-spacing:0.22em;font-weight:600;color:#A8A8A8;flex-shrink:0;">THE FLYWHEEL</span>
       <div style="display:flex;align-items:center;gap:16px;font-size:14px;letter-spacing:0.06em;font-weight:500;color:#FFFFFF;white-space:nowrap;">
         <span>MORE CONTENT</span><span style="color:#A8A8A8;">→</span>
@@ -224,6 +266,34 @@
         <span>MORE SUCCESS STORIES</span><span style="color:#A8A8A8;">→</span>
         <span>MORE FOUNDERS &amp; INVESTORS</span><span style="color:#A8A8A8;">→</span>
         <span style="background:linear-gradient(110deg,#9a9a9a,#f4f4f4,#9a9a9a);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:600;">STRONGER ECOSYSTEM</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" style="position:relative;z-index:1;border-top:1px solid rgba(200,200,200,0.12);padding:120px 0;">
+    <div data-reveal style="max-width:1300px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;">
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="font-size:14px;letter-spacing:0.3em;color:#A8A8A8;">INSIDE THE ROOM</div>
+        <h2 style="margin:0;font-family:var(--font-serif-display),'Playfair Display',serif;font-weight:700;font-size:clamp(38px,4.6vw,64px);line-height:1.1;color:#FFFFFF;">Moments From<br>The Table.</h2>
+      </div>
+      <p style="margin:0;font-size:17px;color:#A0A0A0;line-height:1.6;max-width:420px;">Conversations, recordings, events and the founders who sat down with us.</p>
+    </div>
+
+    <div style="margin-top:60px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);">
+      <div class="bb-gal-track">
+        <!-- GALLERY SLOT 1 --><div class="bb-gal-item"><div class="bb-gal-ph">♠<span>PHOTO 01</span></div></div>
+        <!-- GALLERY SLOT 2 --><div class="bb-gal-item"><div class="bb-gal-ph">♥<span>PHOTO 02</span></div></div>
+        <!-- GALLERY SLOT 3 --><div class="bb-gal-item"><div class="bb-gal-ph">♦<span>PHOTO 03</span></div></div>
+        <!-- GALLERY SLOT 4 --><div class="bb-gal-item"><div class="bb-gal-ph">♣<span>PHOTO 04</span></div></div>
+        <!-- GALLERY SLOT 5 --><div class="bb-gal-item"><div class="bb-gal-ph">♠<span>PHOTO 05</span></div></div>
+        <!-- GALLERY SLOT 6 --><div class="bb-gal-item"><div class="bb-gal-ph">♥<span>PHOTO 06</span></div></div>
+        <!-- duplicate set for seamless loop -->
+        <div class="bb-gal-item"><div class="bb-gal-ph">♠<span>PHOTO 01</span></div></div>
+        <div class="bb-gal-item"><div class="bb-gal-ph">♥<span>PHOTO 02</span></div></div>
+        <div class="bb-gal-item"><div class="bb-gal-ph">♦<span>PHOTO 03</span></div></div>
+        <div class="bb-gal-item"><div class="bb-gal-ph">♣<span>PHOTO 04</span></div></div>
+        <div class="bb-gal-item"><div class="bb-gal-ph">♠<span>PHOTO 05</span></div></div>
+        <div class="bb-gal-item"><div class="bb-gal-ph">♥<span>PHOTO 06</span></div></div>
       </div>
     </div>
   </section>
@@ -345,26 +415,63 @@
     </div>
   </section>
 
+  <section id="featured" style="position:relative;z-index:1;border-top:1px solid rgba(200,200,200,0.12);padding:110px 0;">
+    <div data-reveal style="max-width:1300px;margin:0 auto;padding:0 32px;display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center;">
+      <div style="font-size:14px;letter-spacing:0.3em;color:#A8A8A8;">AS SEEN ACROSS</div>
+      <h2 style="margin:0;font-family:var(--font-serif-display),'Playfair Display',serif;font-weight:700;font-size:clamp(40px,5vw,72px);color:#FFFFFF;">Featured In</h2>
+      <p style="margin:0;font-size:17px;color:#A0A0A0;line-height:1.55;max-width:680px;">Founder stories distributed across national and regional business media.</p>
+    </div>
+
+    <div style="margin-top:60px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);">
+      <div class="bb-logo-row" style="display:flex;gap:22px;width:max-content;animation:bbMarquee 44s linear infinite;padding:4px 0;">
+        <span class="bb-logo">ANI</span><span class="bb-logo">LATESTLY</span><span class="bb-logo">up18 news</span><span class="bb-logo">The Tribune</span><span class="bb-logo">Devdiscourse</span><span class="bb-logo">dailyhunt</span><span class="bb-logo">Central Herald</span><span class="bb-logo">pinkcitynow</span><span class="bb-logo">khabarerajasthan</span><span class="bb-logo">Deccan Express</span><span class="bb-logo">NCR Chronicle</span><span class="bb-logo">mintmoney</span><span class="bb-logo">Your Bangalore</span><span class="bb-logo">MP Guardian</span><span class="bb-logo">indorepioneer</span><span class="bb-logo">lucknowdigital</span>
+        <span class="bb-logo">ANI</span><span class="bb-logo">LATESTLY</span><span class="bb-logo">up18 news</span><span class="bb-logo">The Tribune</span><span class="bb-logo">Devdiscourse</span><span class="bb-logo">dailyhunt</span><span class="bb-logo">Central Herald</span><span class="bb-logo">pinkcitynow</span><span class="bb-logo">khabarerajasthan</span><span class="bb-logo">Deccan Express</span><span class="bb-logo">NCR Chronicle</span><span class="bb-logo">mintmoney</span><span class="bb-logo">Your Bangalore</span><span class="bb-logo">MP Guardian</span><span class="bb-logo">indorepioneer</span><span class="bb-logo">lucknowdigital</span>
+      </div>
+    </div>
+
+    <div style="margin-top:22px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);">
+      <div class="bb-logo-row" style="display:flex;gap:22px;width:max-content;animation:bbMarquee 38s linear infinite reverse;padding:4px 0;">
+        <span class="bb-logo">INDIA TODAY</span><span class="bb-logo">abp</span><span class="bb-logo">Lokmat Times</span><span class="bb-logo">Ahmedabad Mirror</span><span class="bb-logo">FIRST INDIA</span><span class="bb-logo">Hello Entrepreneurs</span><span class="bb-logo">BHASKAR LIVE</span><span class="bb-logo">Samachar Sansaar</span><span class="bb-logo">HT Syndication</span><span class="bb-logo">The Startup Story</span><span class="bb-logo">True Story India</span><span class="bb-logo">JioNews</span><span class="bb-logo">English Loktej</span><span class="bb-logo">The National Age</span>
+        <span class="bb-logo">INDIA TODAY</span><span class="bb-logo">abp</span><span class="bb-logo">Lokmat Times</span><span class="bb-logo">Ahmedabad Mirror</span><span class="bb-logo">FIRST INDIA</span><span class="bb-logo">Hello Entrepreneurs</span><span class="bb-logo">BHASKAR LIVE</span><span class="bb-logo">Samachar Sansaar</span><span class="bb-logo">HT Syndication</span><span class="bb-logo">The Startup Story</span><span class="bb-logo">True Story India</span><span class="bb-logo">JioNews</span><span class="bb-logo">English Loktej</span><span class="bb-logo">The National Age</span>
+      </div>
+    </div>
+
+    <div data-reveal style="margin-top:44px;text-align:center;font-size:14px;letter-spacing:0.14em;color:#A8A8A8;">40+ MEDIA PUBLICATIONS &amp; SYNDICATION PARTNERS</div>
+  </section>
+
   <section id="pricing" style="position:relative;z-index:1;border-top:1px solid rgba(200,200,200,0.12);padding:130px 0;">
     <div style="max-width:1300px;margin:0 auto;padding:0 32px;">
       <div data-reveal style="text-align:center;display:flex;flex-direction:column;gap:18px;align-items:center;">
         <div style="font-size:14px;letter-spacing:0.3em;color:#A8A8A8;">FOUNDER VISIBILITY PROGRAMS</div>
         <h2 style="margin:0;font-family:var(--font-serif-display),'Playfair Display',serif;font-weight:700;font-size:clamp(40px,5vw,72px);color:#FFFFFF;">Choose Your Seat at the Table</h2>
-        <p style="margin:0;font-style:italic;font-size:18px;color:#A0A0A0;max-width:760px;line-height:1.55;">Two curated visibility programs designed to amplify your story, build founder credibility, and connect you with the startup ecosystem.</p>
+        <p style="margin:0;font-style:italic;font-size:18px;color:#A0A0A0;max-width:760px;line-height:1.55;">Three curated visibility programs designed to amplify your story, build founder credibility, and connect you with the startup ecosystem.</p>
       </div>
-      <div style="margin-top:70px;display:grid;grid-template-columns:1fr 1.05fr 1fr;gap:34px;align-items:stretch;">
-        <div data-reveal="left" style="display:flex;flex-direction:column;gap:24px;justify-content:center;">
-          <p style="margin:0;font-size:16px;color:#A0A0A0;line-height:1.6;">The Big Blind Founder Visibility Program is designed to help founders build credibility, increase brand visibility, and reach investors, customers, talent, and the broader startup ecosystem through premium storytelling, strategic PR, and curated distribution.</p>
-          <div style="border-top:1px solid rgba(200,200,200,0.25);padding-top:20px;display:flex;flex-direction:column;gap:10px;">
-            <div style="font-size:13px;letter-spacing:0.2em;color:#A8A8A8;font-weight:600;">INCLUDED IN ALL PACKAGES</div>
-            <div style="display:flex;flex-direction:column;gap:8px;font-size:15px;color:#A0A0A0;line-height:1.45;">
-              <div>— 1 professionally recorded podcast (45–60 mins)</div>
-              <div>— Multi-camera production, studio-quality audio</div>
-              <div>— Full podcast video, feature article on The Big Blind</div>
-              <div>— Social media announcement, LinkedIn founder highlights</div>
-              <div>— Quote cards, Founder profile page</div>
-            </div>
+      <div data-reveal style="margin-top:56px;display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:start;border:1px solid rgba(200,200,200,0.2);border-radius:14px;background:rgba(20,20,20,0.45);padding:34px 40px;">
+        <p style="margin:0;font-size:16px;color:#A0A0A0;line-height:1.6;">The Big Blind Founder Visibility Program is designed to help founders build credibility, increase brand visibility, and reach investors, customers, talent, and the broader startup ecosystem through premium storytelling, strategic PR, and curated distribution.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:13px;letter-spacing:0.2em;color:#A8A8A8;font-weight:600;">INCLUDED IN ALL PACKAGES</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px 24px;font-size:15px;color:#A0A0A0;line-height:1.45;">
+            <div>— 1 professionally recorded podcast (45–60 mins)</div>
+            <div>— Multi-camera production, studio-quality audio</div>
+            <div>— Full podcast video, feature article on The Big Blind</div>
+            <div>— Social media announcement, LinkedIn founder highlights</div>
+            <div>— Quote cards, Founder profile page</div>
           </div>
+        </div>
+      </div>
+      <div style="margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:stretch;">
+        <div data-reveal="left" style="background:rgba(20,20,20,0.55);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(200,200,200,0.28);border-radius:14px;padding:40px 38px;display:flex;flex-direction:column;gap:18px;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-8px);border-color:rgba(240,240,240,0.6);">
+          <h3 style="margin:0;font-family:var(--font-serif-display),'Playfair Display',serif;font-size:30px;font-weight:600;color:#FFFFFF;">Base</h3>
+          <div style="display:flex;align-items:baseline;gap:12px;"><span style="font-size:44px;font-weight:600;color:#FFFFFF;">₹45,000</span><span style="font-size:15px;color:#A8A8A8;">INR + GST</span></div>
+          <p style="margin:0;font-size:15px;color:#A0A0A0;line-height:1.45;">For founders starting out and building their first layer of visibility.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:15px;color:#A0A0A0;line-height:1.4;flex:1;">
+            <div>✓ All standard items +</div>
+            <div>✓ 5 reel content pieces</div>
+            <div>✓ Feature article on The Big Blind</div>
+            <div>✓ Social media announcement</div>
+            <div>✓ Founder profile page</div>
+          </div>
+          <a href="#contact" style="align-self:flex-start;border:1px solid #C8C8C8;color:#FFFFFF;border-radius:999px;padding:14px 34px;font-size:16px;font-weight:600;transition:background .2s ease;" style-hover="background:rgba(255,255,255,0.08);">Get Started →</a>
         </div>
         <div data-reveal style="position:relative;background:rgba(22,22,22,0.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid #D4003D;border-radius:14px;padding:40px 38px;display:flex;flex-direction:column;gap:18px;box-shadow:0 0 60px rgba(212,0,61,0.12);transition:transform .3s ease;" style-hover="transform:translateY(-8px);">
           <div style="position:absolute;top:22px;right:26px;border:1px solid rgba(212,0,61,0.6);border-radius:999px;padding:6px 16px;font-size:13px;color:#FFFFFF;">#bestdeal</div>
@@ -397,25 +504,6 @@
           </div>
           <a href="#contact" style="align-self:flex-start;border:1px solid #C8C8C8;color:#FFFFFF;border-radius:999px;padding:14px 34px;font-size:16px;font-weight:600;transition:background .2s ease;" style-hover="background:rgba(255,255,255,0.08);">Create Impact →</a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section style="position:relative;z-index:1;border-top:1px solid rgba(200,200,200,0.12);padding:120px 0;">
-    <div style="max-width:1300px;margin:0 auto;padding:0 32px;">
-      <div data-reveal style="display:flex;flex-direction:column;gap:16px;">
-        <div style="font-size:14px;letter-spacing:0.3em;color:#A8A8A8;">PHASE 2 &amp; BEYOND</div>
-        <h2 style="margin:0;font-family:var(--font-serif-display),'Playfair Display',serif;font-weight:700;font-size:clamp(38px,4.6vw,64px);color:#FFFFFF;">Future Revenue Streams</h2>
-      </div>
-      <div style="margin-top:56px;display:grid;grid-template-columns:repeat(4,1fr);gap:22px;">
-        <div data-reveal style="background:rgba(20,20,20,0.5);border:1px solid rgba(200,200,200,0.2);border-radius:14px;padding:30px 28px;display:flex;flex-direction:column;gap:12px;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-6px);border-color:rgba(240,240,240,0.5);"><span style="font-size:26px;color:#FFFFFF;">♠</span><h3 style="margin:0;font-size:18px;font-weight:600;color:#FFFFFF;">Community Memberships</h3><p style="margin:0;font-size:14.5px;color:#A0A0A0;line-height:1.45;">Paid founder tiers with curated access</p></div>
-        <div data-reveal style="background:rgba(20,20,20,0.5);border:1px solid rgba(200,200,200,0.2);border-radius:14px;padding:30px 28px;display:flex;flex-direction:column;gap:12px;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-6px);border-color:rgba(240,240,240,0.5);"><span style="font-size:26px;color:#D4003D;">♥</span><h3 style="margin:0;font-size:18px;font-weight:600;color:#FFFFFF;">Investor Memberships</h3><p style="margin:0;font-size:14.5px;color:#A0A0A0;line-height:1.45;">Premium deal-flow and network access</p></div>
-        <div data-reveal style="background:rgba(20,20,20,0.5);border:1px solid rgba(200,200,200,0.2);border-radius:14px;padding:30px 28px;display:flex;flex-direction:column;gap:12px;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-6px);border-color:rgba(240,240,240,0.5);"><span style="font-size:26px;color:#D4003D;">♦</span><h3 style="margin:0;font-size:18px;font-weight:600;color:#FFFFFF;">Events &amp; Demo Days</h3><p style="margin:0;font-size:14.5px;color:#A0A0A0;line-height:1.45;">Ticketed showcases and summits</p></div>
-        <div data-reveal style="background:rgba(20,20,20,0.5);border:1px solid rgba(200,200,200,0.2);border-radius:14px;padding:30px 28px;display:flex;flex-direction:column;gap:12px;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-6px);border-color:rgba(240,240,240,0.5);"><span style="font-size:26px;color:#FFFFFF;">♣</span><h3 style="margin:0;font-size:18px;font-weight:600;color:#FFFFFF;">Advisory Services</h3><p style="margin:0;font-size:14.5px;color:#A0A0A0;line-height:1.45;">Retained strategic and growth advisory</p></div>
-        <div data-reveal style="background:rgba(20,20,20,0.5);border:1px solid rgba(200,200,200,0.2);border-radius:14px;padding:30px 28px;display:flex;flex-direction:column;gap:12px;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-6px);border-color:rgba(240,240,240,0.5);"><span style="font-size:26px;color:#FFFFFF;">♠</span><h3 style="margin:0;font-size:18px;font-weight:600;color:#FFFFFF;">Success Fees on Fundraising</h3><p style="margin:0;font-size:14.5px;color:#A0A0A0;line-height:1.45;">Aligned upside on closed rounds</p></div>
-        <div data-reveal style="background:rgba(20,20,20,0.5);border:1px solid rgba(200,200,200,0.2);border-radius:14px;padding:30px 28px;display:flex;flex-direction:column;gap:12px;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-6px);border-color:rgba(240,240,240,0.5);"><span style="font-size:26px;color:#D4003D;">♥</span><h3 style="margin:0;font-size:18px;font-weight:600;color:#FFFFFF;">Venture Studio</h3><p style="margin:0;font-size:14.5px;color:#A0A0A0;line-height:1.45;">Co-building companies from zero</p></div>
-        <div data-reveal style="background:rgba(20,20,20,0.5);border:1px solid rgba(200,200,200,0.2);border-radius:14px;padding:30px 28px;display:flex;flex-direction:column;gap:12px;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-6px);border-color:rgba(240,240,240,0.5);"><span style="font-size:26px;color:#D4003D;">♦</span><h3 style="margin:0;font-size:18px;font-weight:600;color:#FFFFFF;">Syndicate Investing</h3><p style="margin:0;font-size:14.5px;color:#A0A0A0;line-height:1.45;">Pooled investing with the network</p></div>
-        <div data-reveal style="background:rgba(20,20,20,0.5);border:1px solid rgba(200,200,200,0.2);border-radius:14px;padding:30px 28px;display:flex;flex-direction:column;gap:12px;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-6px);border-color:rgba(240,240,240,0.5);"><span style="font-size:26px;color:#FFFFFF;">♣</span><h3 style="margin:0;font-size:18px;font-weight:600;color:#FFFFFF;">Data &amp; Market Intelligence</h3><p style="margin:0;font-size:14.5px;color:#A0A0A0;line-height:1.45;">Ecosystem insights and reports</p></div>
       </div>
     </div>
   </section>
@@ -464,7 +552,7 @@ class Component extends DCLogic {
         const start = performance.now();
         const tick = (now) => {
           const p = Math.min(1, (now - start) / 1400);
-          this._counter.textContent = Math.round(70 * (1 - Math.pow(1 - p, 3)));
+          this._counter.textContent = Math.round(200 * (1 - Math.pow(1 - p, 3)));
           if (p < 1) requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
