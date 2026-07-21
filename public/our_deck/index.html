@@ -47,16 +47,23 @@
       .bb-logo{height:62px;padding:0 24px;font-size:16px;}
       .bb-logo img{max-height:30px;max-width:112px;}
     }
-    /* Gallery carousel */
-    .bb-gal-track{display:flex;gap:20px;width:max-content;animation:bbMarquee 55s linear infinite;}
-    .bb-gal-track:hover{animation-play-state:paused;}
+    /* Gallery carousel — auto-drifts, drag with mouse, swipe on touch.
+       Touch uses the browser's native horizontal scrolling (no touch-action
+       override) so vertical page scroll keeps working normally. */
+    .bb-gal-viewport{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;
+      -ms-overflow-style:none;-webkit-overflow-scrolling:touch;cursor:grab;}
+    .bb-gal-viewport::-webkit-scrollbar{display:none;}
+    .bb-gal-viewport.is-dragging{cursor:grabbing;}
+    .bb-gal-viewport.is-dragging .bb-gal-item{pointer-events:none;}
+    .bb-gal-track{display:flex;gap:20px;width:max-content;}
     .bb-gal-item{flex-shrink:0;width:clamp(260px,26vw,400px);aspect-ratio:4 / 3;border-radius:14px;
       overflow:hidden;border:1px solid rgba(200,200,200,0.2);background:rgba(20,20,20,0.6);
       position:relative;transition:transform .35s ease,border-color .35s ease;}
     .bb-gal-item:hover{transform:translateY(-8px);border-color:rgba(240,240,240,0.5);}
     .bb-gal-item{margin:0;}
     .bb-gal-item img{width:100%;height:100%;object-fit:cover;display:block;
-      transition:transform .5s cubic-bezier(.22,1,.36,1);}
+      transition:transform .5s cubic-bezier(.22,1,.36,1);
+      -webkit-user-drag:none;user-select:none;-webkit-user-select:none;}
     .bb-gal-item:hover img{transform:scale(1.05);}
     .bb-gal-cap{position:absolute;left:0;right:0;bottom:0;padding:34px 20px 16px;
       font-size:14px;font-weight:500;letter-spacing:0.02em;color:#FFFFFF;
@@ -87,7 +94,7 @@
       <a href="#media" style="color:#A0A0A0;" style-hover="color:#FFFFFF;">MEDIA</a>
       <a href="#pricing" style="color:#A0A0A0;" style-hover="color:#FFFFFF;">PRICING</a>
     </div>
-    <a href="#pricing" style="background:#D4003D;color:#FFFFFF;border-radius:999px;padding:10px 24px;font-size:14px;font-weight:600;letter-spacing:0.06em;white-space:nowrap;transition:background .2s ease;" style-hover="background:#E8134F;">TAKE A SEAT</a>
+    <a href="https://wa.me/917032289906" target="_blank" rel="noopener noreferrer" style="background:#D4003D;color:#FFFFFF;border-radius:999px;padding:10px 24px;font-size:14px;font-weight:600;letter-spacing:0.06em;white-space:nowrap;transition:background .2s ease;" style-hover="background:#E8134F;">TAKE A SEAT</a>
   </nav>
 
   <header id="top" style="position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:160px 24px 100px;gap:34px;">
@@ -286,7 +293,7 @@
       <p style="margin:0;font-size:17px;color:#A0A0A0;line-height:1.6;max-width:420px;">Conversations, recordings, events and the founders who sat down with us.</p>
     </div>
 
-    <div style="margin-top:60px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);">
+    <div class="bb-gal-viewport" style="margin-top:60px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);">
       <div class="bb-gal-track">
         <figure class="bb-gal-item"><img src="/our_deck/gallery/ashish-khetan-benzai10.jpg" alt="Ashish Khetan - Benzai10" title="Ashish Khetan - Benzai10" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Ashish Khetan - Benzai10</figcaption></figure>
         <figure class="bb-gal-item"><img src="/our_deck/gallery/chetan-yellapurkar-golf-and-beyond.jpg" alt="Chetan Yellapurkar - Golf&amp;Beyond" title="Chetan Yellapurkar - Golf&amp;Beyond" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Chetan Yellapurkar - Golf&amp;Beyond</figcaption></figure>
@@ -488,7 +495,7 @@
             <div>✓ Social media announcement</div>
             <div>✓ Founder profile page</div>
           </div>
-          <a href="#contact" style="align-self:flex-start;border:1px solid #C8C8C8;color:#FFFFFF;border-radius:999px;padding:14px 34px;font-size:16px;font-weight:600;transition:background .2s ease;" style-hover="background:rgba(255,255,255,0.08);">Get Started →</a>
+          <a href="https://wa.me/917032289906" target="_blank" rel="noopener noreferrer" style="align-self:flex-start;border:1px solid #C8C8C8;color:#FFFFFF;border-radius:999px;padding:14px 34px;font-size:16px;font-weight:600;transition:background .2s ease;" style-hover="background:rgba(255,255,255,0.08);">Get Started →</a>
         </div>
         <div data-reveal style="position:relative;background:rgba(22,22,22,0.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid #D4003D;border-radius:14px;padding:40px 38px;display:flex;flex-direction:column;gap:18px;box-shadow:0 0 60px rgba(212,0,61,0.12);transition:transform .3s ease;" style-hover="transform:translateY(-8px);">
           <div style="position:absolute;top:22px;right:26px;border:1px solid rgba(212,0,61,0.6);border-radius:999px;padding:6px 16px;font-size:13px;color:#FFFFFF;">#bestdeal</div>
@@ -504,7 +511,7 @@
             <div>✓ SEO-friendly article</div>
             <div>✓ Business collab support</div>
           </div>
-          <a href="#contact" style="align-self:flex-start;background:#D4003D;color:#FFFFFF;border-radius:999px;padding:14px 34px;font-size:16px;font-weight:600;transition:background .2s ease;" style-hover="background:#E8134F;">Get Featured →</a>
+          <a href="https://wa.me/917032289906" target="_blank" rel="noopener noreferrer" style="align-self:flex-start;background:#D4003D;color:#FFFFFF;border-radius:999px;padding:14px 34px;font-size:16px;font-weight:600;transition:background .2s ease;" style-hover="background:#E8134F;">Get Featured →</a>
         </div>
         <div data-reveal="right" style="background:rgba(20,20,20,0.55);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(200,200,200,0.35);border-radius:14px;padding:40px 38px;display:flex;flex-direction:column;gap:18px;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-8px);border-color:rgba(240,240,240,0.6);">
           <h3 style="margin:0;font-family:var(--font-serif-display),'Playfair Display',serif;font-size:30px;font-weight:600;color:#FFFFFF;">Growth Stage</h3>
@@ -519,7 +526,7 @@
             <div>✓ Founder documentary-style teaser</div>
             <div>✓ Warm introductions to VCs</div>
           </div>
-          <a href="#contact" style="align-self:flex-start;border:1px solid #C8C8C8;color:#FFFFFF;border-radius:999px;padding:14px 34px;font-size:16px;font-weight:600;transition:background .2s ease;" style-hover="background:rgba(255,255,255,0.08);">Create Impact →</a>
+          <a href="https://wa.me/917032289906" target="_blank" rel="noopener noreferrer" style="align-self:flex-start;border:1px solid #C8C8C8;color:#FFFFFF;border-radius:999px;padding:14px 34px;font-size:16px;font-weight:600;transition:background .2s ease;" style-hover="background:rgba(255,255,255,0.08);">Create Impact →</a>
         </div>
       </div>
     </div>
@@ -534,7 +541,7 @@
       <span style="color:#A8A8A8;">|</span>
       <a href="mailto:dealer@thebigblind.club" style="color:#FFFFFF;" style-hover="color:#E0E0E0;">dealer@thebigblind.club</a>
       <span style="color:#A8A8A8;">|</span>
-      <span>+91 90354 62042</span>
+      <a href="tel:+917032289906" style="color:#FFFFFF;" style-hover="color:#E0E0E0;">+91 70322 89906</a>
     </div>
     <div style="margin-top:50px;font-size:12px;letter-spacing:0.3em;color:#A8A8A8;">THE BIG ♠ BLIND — THE RIGHT TABLE. THE RIGHT PEOPLE. THE RIGHT BETS.</div>
   </footer>
@@ -577,11 +584,108 @@ class Component extends DCLogic {
     };
     window.addEventListener('scroll', this._onScroll, { passive: true });
     this._onScroll();
+    this._initGallery();
   }
+
+  /* Gallery: continuous drift + mouse drag + native touch swipe.
+     The track holds two identical copies of the photo set, so wrapping at
+     the halfway mark is visually seamless in either direction. */
+  _initGallery() {
+    const vp = document.querySelector('.bb-gal-viewport');
+    const track = vp && vp.querySelector('.bb-gal-track');
+    if (!vp || !track) return;
+    this._vp = vp;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const SPEED = 34; // px per second
+    const half = () => track.scrollWidth / 2;
+
+    let dragging = false, hovering = false, touching = false;
+    let startX = 0, startScroll = 0, moved = 0;
+    let touchTimer = null, last = performance.now();
+
+    const wrap = () => {
+      const h = half();
+      if (h <= 0) return;
+      if (vp.scrollLeft >= h) vp.scrollLeft -= h;
+      else if (vp.scrollLeft <= 0) vp.scrollLeft = h - 1;
+    };
+
+    const frame = (now) => {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      if (!reduced && !dragging && !hovering && !touching && !document.hidden) {
+        vp.scrollLeft += SPEED * dt;
+      }
+      wrap();
+      this._galRaf = requestAnimationFrame(frame);
+    };
+    this._galRaf = requestAnimationFrame(frame);
+
+    // Mouse drag only — touch falls through to native overflow scrolling.
+    this._onDown = (e) => {
+      if (e.pointerType !== 'mouse') return;
+      dragging = true; moved = 0;
+      startX = e.clientX; startScroll = vp.scrollLeft;
+      vp.classList.add('is-dragging');
+      try { vp.setPointerCapture(e.pointerId); } catch (err) {}
+    };
+    this._onMove = (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - startX;
+      moved = Math.max(moved, Math.abs(dx));
+      vp.scrollLeft = startScroll - dx;
+      e.preventDefault();
+    };
+    this._onUp = (e) => {
+      if (!dragging) return;
+      dragging = false;
+      vp.classList.remove('is-dragging');
+      try { vp.releasePointerCapture(e.pointerId); } catch (err) {}
+    };
+    this._onEnter = () => { hovering = true; };
+    this._onLeave = () => { hovering = false; };
+    // Pause the drift while a finger is down, and briefly after, so it
+    // doesn't fight the momentum of a native swipe.
+    this._onTouchStart = () => { touching = true; clearTimeout(touchTimer); };
+    this._onTouchEnd = () => {
+      clearTimeout(touchTimer);
+      touchTimer = setTimeout(() => { touching = false; }, 900);
+    };
+    this._onDragStart = (e) => e.preventDefault();
+
+    vp.addEventListener('pointerdown', this._onDown);
+    vp.addEventListener('pointermove', this._onMove);
+    vp.addEventListener('pointerup', this._onUp);
+    vp.addEventListener('pointercancel', this._onUp);
+    vp.addEventListener('mouseenter', this._onEnter);
+    vp.addEventListener('mouseleave', this._onLeave);
+    vp.addEventListener('touchstart', this._onTouchStart, { passive: true });
+    vp.addEventListener('touchend', this._onTouchEnd, { passive: true });
+    vp.addEventListener('touchcancel', this._onTouchEnd, { passive: true });
+    vp.addEventListener('dragstart', this._onDragStart);
+    this._touchTimerRef = () => touchTimer;
+  }
+
   componentWillUnmount() {
     if (this._io) this._io.disconnect();
     window.removeEventListener('scroll', this._onScroll);
     clearTimeout(this._t);
+    if (this._galRaf) cancelAnimationFrame(this._galRaf);
+    if (this._touchTimerRef) clearTimeout(this._touchTimerRef());
+    const vp = this._vp;
+    if (vp) {
+      vp.removeEventListener('pointerdown', this._onDown);
+      vp.removeEventListener('pointermove', this._onMove);
+      vp.removeEventListener('pointerup', this._onUp);
+      vp.removeEventListener('pointercancel', this._onUp);
+      vp.removeEventListener('mouseenter', this._onEnter);
+      vp.removeEventListener('mouseleave', this._onLeave);
+      vp.removeEventListener('touchstart', this._onTouchStart);
+      vp.removeEventListener('touchend', this._onTouchEnd);
+      vp.removeEventListener('touchcancel', this._onTouchEnd);
+      vp.removeEventListener('dragstart', this._onDragStart);
+    }
   }
 }
 </script>
