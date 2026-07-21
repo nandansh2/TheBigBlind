@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0b0b0d;
+  --bone: #f5f4f2;
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  * {
+    @apply border-silver-line;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-ink text-bone font-body;
+    background-color: var(--ink);
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+
+  /* Ambient felt-like depth as a fixed backdrop layer (kept off `body`
+     background-attachment for mobile/perf + compositing correctness). */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      radial-gradient(120% 80% at 50% -10%, rgba(255, 61, 104, 0.06), transparent 60%),
+      radial-gradient(90% 60% at 50% 110%, rgba(195, 199, 206, 0.05), transparent 60%);
+  }
+
+  ::selection {
+    background: rgba(255, 61, 104, 0.28);
+    color: #fff;
+  }
+
+  /* Accessible focus — never removed, only restyled */
+  :focus-visible {
+    outline: 2px solid rgba(255, 61, 104, 0.7);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* ---- Editorial label / eyebrow ---- */
+  .eyebrow {
+    @apply font-mono uppercase text-[0.7rem] tracking-eyebrow text-silver;
+  }
+  .label {
+    @apply font-mono uppercase text-[0.72rem] tracking-label text-silver-dim;
+  }
+
+  /* ---- Glassmorphism surface (refined) ---- */
+  .glass {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.014)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px) saturate(125%);
+    -webkit-backdrop-filter: blur(16px) saturate(125%);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      0 24px 60px -34px rgba(0, 0, 0, 0.85);
+  }
+  .glass-hover {
+    transition: border-color 0.5s var(--ease-expo), background 0.5s var(--ease-expo),
+      transform 0.5s var(--ease-expo), box-shadow 0.5s var(--ease-expo);
+  }
+  .glass-hover:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.075),
+      rgba(255, 255, 255, 0.025)
+    );
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
+      0 30px 70px -34px rgba(0, 0, 0, 0.9);
+  }
+
+  /* Silver-bordered premium card (Elite Suits Club, notices) */
+  .silver-border {
+    position: relative;
+    border: 1px solid transparent;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01))
+        padding-box,
+      linear-gradient(
+          140deg,
+          rgba(231, 233, 237, 0.55),
+          rgba(139, 144, 152, 0.15) 40%,
+          rgba(231, 233, 237, 0.4)
+        )
+        border-box;
+  }
+
+  /* Metallic silver text (glyphs, stats) */
+  .metal-silver {
+    background: linear-gradient(180deg, #eef0f3 0%, #c3c7ce 45%, #8b9098 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hairline {
+    @apply h-px w-full bg-silver-line;
+  }
+
+  /* Polished silver button — brushed-metal fill with a shine sweep on hover */
+  .btn-silver {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    color: #0b0b0d;
+    background: linear-gradient(
+      180deg,
+      #f7f8fa 0%,
+      #dfe3e8 38%,
+      #b3b9c1 72%,
+      #eceef1 100%
+    );
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
+      inset 0 -1px 0 0 rgba(0, 0, 0, 0.18),
+      0 18px 44px -18px rgba(199, 203, 210, 0.5);
+    transition: transform 0.5s var(--ease-expo), box-shadow 0.5s var(--ease-expo);
+  }
+  .btn-silver::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    left: -70%;
+    width: 45%;
+    transform: skewX(-18deg);
+    background: linear-gradient(
+      100deg,
+      transparent,
+      rgba(255, 255, 255, 0.9),
+      transparent
+    );
+    transition: left 0.9s var(--ease-expo);
+    z-index: -1;
+  }
+  .btn-silver:hover::after,
+  .btn-silver:focus-visible::after {
+    left: 125%;
+  }
+  .btn-silver:hover {
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 0 rgba(0, 0, 0, 0.2),
+      0 26px 60px -18px rgba(199, 203, 210, 0.7);
+  }
+
+  /* Pill button (path/stage selectors) */
+  .pill {
+    @apply font-mono uppercase tracking-label text-[0.72rem] rounded-full px-5 py-2.5 transition-all duration-300;
+    transition-timing-function: var(--ease-expo);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .content-px {
+    @apply px-6 sm:px-8 lg:px-12;
+  }
+  .section-py {
+    @apply py-24 md:py-32 lg:py-40;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Respect reduced-motion globally as a safety net */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -5,14 +5,14 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "700", "800", "900"],
-  variable: "--font-inter",
+  variable: "--font-sans",
   display: "swap",
 });
 
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["500"],
-  variable: "--font-plex-mono",
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -20,14 +20,16 @@ const fraunces = Fraunces({
   subsets: ["latin"],
   weight: ["500"],
   style: ["italic"],
-  variable: "--font-fraunces",
+  variable: "--font-serif",
   display: "swap",
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://thebigblind.club"),
   title: "The Big Blind",
   description:
     "The Big Blind is a venture-building ecosystem built around one principle: the right conversation, with the right people, at the right time, changes everything.",
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({

@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Big Blind
 
-## Getting Started
+The website for The Big Blind — a venture-building ecosystem connecting founders,
+investors, VCs, and financial institutions.
 
-First, run the development server:
+## Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This repo serves **two distinct sites** from one Next.js app, using route groups
+with [multiple root layouts](https://nextjs.org/docs/app/building-your-application/routing/route-groups#creating-multiple-root-layouts).
+Each group owns its fonts and CSS, so the two design systems stay fully isolated.
+
+```
+src/app/
+  (site)/        → the main site        (/, /vision, /founders, …)
+  (waitlist)/    → the original landing page at /waitlist
+  sitemap.ts     robots.ts   icon.svg
+public/our_deck/ → static investor deck served at /our_deck (via next.config rewrites)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Routes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route | What |
+|---|---|
+| `/` | Main site homepage — shader hero |
+| `/vision` | Our Vision |
+| `/founders` `/investors` `/venture-capital` `/financial-institutions` | Where We Come In |
+| `/partners` | Partners, network, photo carousel |
+| `/reach-out` | Application form (Formspree) |
+| `/waitlist` | The original waitlist landing page |
+| `/our_deck` | Static investor deck (plain HTML in `public/`) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Design systems
 
-## Learn More
+Both token sets live in `tailwind.config.ts`. Font families resolve through CSS
+variables that **each root layout defines**, so `font-mono` means JetBrains inside
+`(site)` and IBM Plex inside `(waitlist)` without either overriding the other.
 
-To learn more about Next.js, take a look at the following resources:
+| | (site) | (waitlist) |
+|---|---|---|
+| Display | Fraunces | Fraunces (italic) |
+| Body | Manrope | Inter |
+| Mono | JetBrains Mono | IBM Plex Mono |
+| Background | `#0B0B0D` | `#0A0A0A` |
+| Accent | `#FF3D68` pink-red | — |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Suits (♠♥♦♣) are custom SVGs in `src/components/primitives/Glyph.tsx` — colour-aware
+(♥♦ pink, ♠♣ silver), never emoji.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Develop
 
-## Deploy on Vercel
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> Don't run `npm run build` while `next dev` is running — they share `.next` and the
+> dev server will start 404ing. Stop dev first, or `rm -rf .next && npm run dev` after.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## SEO
+
+Base layer in place: per-page titles/descriptions, canonical URLs, Open Graph +
+Twitter cards (`src/lib/seo.ts` → `pageMeta()`), `sitemap.xml`, `robots.txt`,
+JSON-LD `Organization`, semantic headings, and alt text on every image.
+
+**Still to do:** a real Open Graph share image (`opengraph-image.png`), per-page OG
+images, and richer structured data (Person / BreadcrumbList / FAQ).
+
+## Assets
+
+Gallery photos live in `public/assets/gallery/` and are referenced from
+`src/components/partners/GalleryCarousel.tsx`. Logo placeholders are in
+`public/assets/`.
+
+## Form
+
+`/reach-out` posts to Formspree (`SITE.formspree` in `src/lib/constants.ts`).
+Fields include the selected path, the "I am a" segment, and contact details.
