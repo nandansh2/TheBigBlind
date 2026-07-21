@@ -38,7 +38,7 @@
     .bb-logo{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;
       flex-shrink:0;height:76px;padding:0 34px;border:1px solid rgba(200,200,200,0.16);
       border-radius:12px;background:rgba(255,255,255,0.035);color:#E8E8E8;
-      font-size:19px;font-weight:600;letter-spacing:0.01em;opacity:.72;
+      font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;opacity:.72;
       transition:opacity .3s ease,border-color .3s ease,background .3s ease;}
     .bb-logo:hover{opacity:1;border-color:rgba(240,240,240,0.42);background:rgba(255,255,255,0.06);}
     .bb-logo img{max-height:40px;max-width:150px;width:auto;height:auto;object-fit:contain;
@@ -54,10 +54,17 @@
       overflow:hidden;border:1px solid rgba(200,200,200,0.2);background:rgba(20,20,20,0.6);
       position:relative;transition:transform .35s ease,border-color .35s ease;}
     .bb-gal-item:hover{transform:translateY(-8px);border-color:rgba(240,240,240,0.5);}
-    .bb-gal-item img{width:100%;height:100%;object-fit:cover;display:block;}
-    .bb-gal-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
-      justify-content:center;gap:10px;color:#6E6E6E;font-size:13px;letter-spacing:0.18em;
-      background:repeating-linear-gradient(45deg,rgba(255,255,255,0.018) 0 12px,transparent 12px 24px);}
+    .bb-gal-item{margin:0;}
+    .bb-gal-item img{width:100%;height:100%;object-fit:cover;display:block;
+      transition:transform .5s cubic-bezier(.22,1,.36,1);}
+    .bb-gal-item:hover img{transform:scale(1.05);}
+    .bb-gal-cap{position:absolute;left:0;right:0;bottom:0;padding:34px 20px 16px;
+      font-size:14px;font-weight:500;letter-spacing:0.02em;color:#FFFFFF;
+      background:linear-gradient(to top,rgba(6,6,6,0.88),rgba(6,6,6,0.45) 55%,transparent);
+      opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .bb-gal-item:hover .bb-gal-cap{opacity:1;transform:none;}
+    @media (hover:none){.bb-gal-cap{opacity:1;transform:none;}}
   </style>
 </helmet>
 
@@ -281,19 +288,29 @@
 
     <div style="margin-top:60px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);">
       <div class="bb-gal-track">
-        <!-- GALLERY SLOT 1 --><div class="bb-gal-item"><div class="bb-gal-ph">♠<span>PHOTO 01</span></div></div>
-        <!-- GALLERY SLOT 2 --><div class="bb-gal-item"><div class="bb-gal-ph">♥<span>PHOTO 02</span></div></div>
-        <!-- GALLERY SLOT 3 --><div class="bb-gal-item"><div class="bb-gal-ph">♦<span>PHOTO 03</span></div></div>
-        <!-- GALLERY SLOT 4 --><div class="bb-gal-item"><div class="bb-gal-ph">♣<span>PHOTO 04</span></div></div>
-        <!-- GALLERY SLOT 5 --><div class="bb-gal-item"><div class="bb-gal-ph">♠<span>PHOTO 05</span></div></div>
-        <!-- GALLERY SLOT 6 --><div class="bb-gal-item"><div class="bb-gal-ph">♥<span>PHOTO 06</span></div></div>
+        <figure class="bb-gal-item"><img src="/our_deck/gallery/ashish-khetan-benzai10.jpg" alt="Ashish Khetan - Benzai10" title="Ashish Khetan - Benzai10" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Ashish Khetan - Benzai10</figcaption></figure>
+        <figure class="bb-gal-item"><img src="/our_deck/gallery/chetan-yellapurkar-golf-and-beyond.jpg" alt="Chetan Yellapurkar - Golf&amp;Beyond" title="Chetan Yellapurkar - Golf&amp;Beyond" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Chetan Yellapurkar - Golf&amp;Beyond</figcaption></figure>
+        <figure class="bb-gal-item"><img src="/our_deck/gallery/nandan-shetty-desync.jpg" alt="Nandan Shetty - Desync" title="Nandan Shetty - Desync" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Nandan Shetty - Desync</figcaption></figure>
+        <figure class="bb-gal-item"><img src="/our_deck/gallery/nandan-shetty-desync-studio.jpg" alt="Nandan Shetty - Desync Studio" title="Nandan Shetty - Desync Studio" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Nandan Shetty - Desync Studio</figcaption></figure>
+        <figure class="bb-gal-item"><img src="/our_deck/gallery/nithish-leptron.jpg" alt="Nithish - Leptron" title="Nithish - Leptron" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Nithish - Leptron</figcaption></figure>
+        <figure class="bb-gal-item"><img src="/our_deck/gallery/rohit-salveru.jpg" alt="Rohit Salveru" title="Rohit Salveru" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Rohit Salveru</figcaption></figure>
+        <figure class="bb-gal-item"><img src="/our_deck/gallery/rohit-salveru-2.jpg" alt="Rohit Salveru" title="Rohit Salveru" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Rohit Salveru</figcaption></figure>
+        <figure class="bb-gal-item"><img src="/our_deck/gallery/rohit-salveru-cargofirst.jpg" alt="Rohit Salveru - CargoFirst" title="Rohit Salveru - CargoFirst" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Rohit Salveru - CargoFirst</figcaption></figure>
+        <figure class="bb-gal-item"><img src="/our_deck/gallery/vaibhav-kubar-labs.jpg" alt="Vaibhav - Kubar Labs" title="Vaibhav - Kubar Labs" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Vaibhav - Kubar Labs</figcaption></figure>
+        <figure class="bb-gal-item"><img src="/our_deck/gallery/vineet-capitalcorn.jpg" alt="Vineet - CapitalCorn" title="Vineet - CapitalCorn" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Vineet - CapitalCorn</figcaption></figure>
+        <figure class="bb-gal-item"><img src="/our_deck/gallery/rohit-at-goa.jpg" alt="Rohit at Goa" title="Rohit at Goa" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Rohit at Goa</figcaption></figure>
         <!-- duplicate set for seamless loop -->
-        <div class="bb-gal-item"><div class="bb-gal-ph">♠<span>PHOTO 01</span></div></div>
-        <div class="bb-gal-item"><div class="bb-gal-ph">♥<span>PHOTO 02</span></div></div>
-        <div class="bb-gal-item"><div class="bb-gal-ph">♦<span>PHOTO 03</span></div></div>
-        <div class="bb-gal-item"><div class="bb-gal-ph">♣<span>PHOTO 04</span></div></div>
-        <div class="bb-gal-item"><div class="bb-gal-ph">♠<span>PHOTO 05</span></div></div>
-        <div class="bb-gal-item"><div class="bb-gal-ph">♥<span>PHOTO 06</span></div></div>
+        <figure class="bb-gal-item" aria-hidden="true"><img src="/our_deck/gallery/ashish-khetan-benzai10.jpg" alt="" title="Ashish Khetan - Benzai10" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Ashish Khetan - Benzai10</figcaption></figure>
+        <figure class="bb-gal-item" aria-hidden="true"><img src="/our_deck/gallery/chetan-yellapurkar-golf-and-beyond.jpg" alt="" title="Chetan Yellapurkar - Golf&amp;Beyond" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Chetan Yellapurkar - Golf&amp;Beyond</figcaption></figure>
+        <figure class="bb-gal-item" aria-hidden="true"><img src="/our_deck/gallery/nandan-shetty-desync.jpg" alt="" title="Nandan Shetty - Desync" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Nandan Shetty - Desync</figcaption></figure>
+        <figure class="bb-gal-item" aria-hidden="true"><img src="/our_deck/gallery/nandan-shetty-desync-studio.jpg" alt="" title="Nandan Shetty - Desync Studio" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Nandan Shetty - Desync Studio</figcaption></figure>
+        <figure class="bb-gal-item" aria-hidden="true"><img src="/our_deck/gallery/nithish-leptron.jpg" alt="" title="Nithish - Leptron" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Nithish - Leptron</figcaption></figure>
+        <figure class="bb-gal-item" aria-hidden="true"><img src="/our_deck/gallery/rohit-salveru.jpg" alt="" title="Rohit Salveru" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Rohit Salveru</figcaption></figure>
+        <figure class="bb-gal-item" aria-hidden="true"><img src="/our_deck/gallery/rohit-salveru-2.jpg" alt="" title="Rohit Salveru" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Rohit Salveru</figcaption></figure>
+        <figure class="bb-gal-item" aria-hidden="true"><img src="/our_deck/gallery/rohit-salveru-cargofirst.jpg" alt="" title="Rohit Salveru - CargoFirst" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Rohit Salveru - CargoFirst</figcaption></figure>
+        <figure class="bb-gal-item" aria-hidden="true"><img src="/our_deck/gallery/vaibhav-kubar-labs.jpg" alt="" title="Vaibhav - Kubar Labs" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Vaibhav - Kubar Labs</figcaption></figure>
+        <figure class="bb-gal-item" aria-hidden="true"><img src="/our_deck/gallery/vineet-capitalcorn.jpg" alt="" title="Vineet - CapitalCorn" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Vineet - CapitalCorn</figcaption></figure>
+        <figure class="bb-gal-item" aria-hidden="true"><img src="/our_deck/gallery/rohit-at-goa.jpg" alt="" title="Rohit at Goa" loading="lazy" decoding="async" width="1200" height="803"><figcaption class="bb-gal-cap">Rohit at Goa</figcaption></figure>
       </div>
     </div>
   </section>
