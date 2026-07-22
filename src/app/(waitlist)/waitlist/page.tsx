@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/seo";
 import Nav from "@/components/Nav";
 import ScrollProgress from "@/components/ScrollProgress";
 import Hero from "@/components/Hero";
@@ -21,12 +22,14 @@ export const metadata: Metadata = {
     siteName: "The Big Blind",
     locale: "en_IN",
     type: "website",
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "Join the Waitlist · The Big Blind",
     description:
       "A venture-building ecosystem built around one principle: the right conversation, with the right people, at the right time.",
+    images: [OG_IMAGE.url],
   },
 };
 

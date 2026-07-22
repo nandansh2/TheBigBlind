@@ -6,6 +6,7 @@ import { Navbar } from "@/components/nav/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { SITE } from "@/lib/constants";
+import { OG_IMAGE } from "@/lib/seo";
 
 // Display — Fraunces: a soft, high-personality luxury serif used with restraint
 // (hero + literary scroll lines + titles only). Deliberately not a Didone.
@@ -62,12 +63,14 @@ export const metadata: Metadata = {
     siteName: "The Big Blind",
     locale: "en_IN",
     type: "website",
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "The Big Blind",
     description:
       "A venture-building ecosystem. One curated table. Every introduction earned.",
+    images: [OG_IMAGE.url],
   },
   robots: {
     index: true,
