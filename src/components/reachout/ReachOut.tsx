@@ -1,7 +1,6 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useSearchParams } from "next/navigation";
 import { useMemo, useState, type FormEvent } from "react";
 import { Section } from "@/components/primitives/Section";
 import { Glyph, type GlyphName } from "@/components/primitives/Glyph";
@@ -64,13 +63,17 @@ const fieldClass =
 const labelClass =
   "mb-2 block font-mono text-[0.68rem] uppercase tracking-label text-silver-dim";
 
-export function ReachOut() {
-  const params = useSearchParams();
+/**
+ * `initialPath` is resolved on the server from the ?path= query so this whole
+ * section server-renders. Reading it with useSearchParams() instead would opt
+ * the subtree out of prerendering, leaving the form (and the #apply anchor)
+ * missing from the initial HTML.
+ */
+export function ReachOut({ initialPath }: { initialPath?: string }) {
   const initial = useMemo(() => {
-    const p = params.get("path");
-    const found = PATHS.findIndex((x) => x.key === p);
+    const found = PATHS.findIndex((x) => x.key === initialPath);
     return found >= 0 ? found : 0;
-  }, [params]);
+  }, [initialPath]);
 
   const [active, setActive] = useState(initial);
   const [role, setRole] = useState("");
@@ -167,8 +170,12 @@ export function ReachOut() {
         </div>
       </Section>
 
-      {/* Contact form */}
-      <Section className="section-py border-t border-silver-line">
+      {/* Contact form. #apply is the deep-link target from the homepage hero;
+          scroll-mt keeps it clear of the sticky navbar. */}
+      <Section
+        id="apply"
+        className="section-py scroll-mt-24 border-t border-silver-line md:scroll-mt-28"
+      >
         <div className="mx-auto max-w-prose">
           <AnimatePresence mode="wait" initial={false}>
             {status === "success" ? (

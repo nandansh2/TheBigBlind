@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ShaderAnimation } from "@/components/ui/shader-animation";
 
 /**
@@ -7,10 +8,6 @@ import { ShaderAnimation } from "@/components/ui/shader-animation";
  * readable even if scripts never run — see the fail-open contract in globals.css.
  */
 export function HomeHero() {
-  const scrollToRoom = () => {
-    document.getElementById("room")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden">
       {/* Shader light-field background */}
@@ -63,10 +60,9 @@ export function HomeHero() {
         </p>
       </div>
 
-      {/* Corner apply card, scrolls to the scroll section */}
-      <button
-        type="button"
-        onClick={scrollToRoom}
+      {/* Corner apply card — deep-links to the application form on /reach-out */}
+      <Link
+        href="/reach-out#apply"
         style={{ animationDelay: "0.5s" }}
         className="glass glass-hover group rise absolute bottom-8 right-6 z-10 flex items-center gap-4 rounded-[10px] px-6 py-4 text-left md:bottom-10 md:right-10"
       >
@@ -78,10 +74,13 @@ export function HomeHero() {
             apply to join the waitlist
           </span>
         </span>
-        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-silver-line text-bone transition-transform duration-500 ease-expo group-hover:translate-y-0.5">
-          ↓
+        <span
+          aria-hidden
+          className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-silver-line text-bone transition-transform duration-500 ease-expo group-hover:translate-x-0.5"
+        >
+          →
         </span>
-      </button>
+      </Link>
 
       {/* subtle centre scroll cue */}
       <div className="pointer-events-none absolute inset-x-0 bottom-8 flex justify-center">

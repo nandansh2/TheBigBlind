@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { pageMeta } from "@/lib/seo";
-import { Suspense } from "react";
 import { Section } from "@/components/primitives/Section";
 import { Reveal } from "@/components/primitives/Reveal";
 import { Icon } from "@/components/primitives/Icon";
@@ -13,7 +12,11 @@ export const metadata: Metadata = pageMeta({
   path: "/reach-out",
 });
 
-export default function ReachOutPage() {
+export default function ReachOutPage({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
   return (
     <>
       {/* Hero */}
@@ -65,9 +68,7 @@ export default function ReachOutPage() {
       </Section>
 
       {/* Path selector + form (client, reads ?path=) */}
-      <Suspense fallback={<div className="min-h-[40vh]" />}>
-        <ReachOut />
-      </Suspense>
+      <ReachOut initialPath={typeof searchParams?.path === "string" ? searchParams.path : undefined} />
     </>
   );
 }
