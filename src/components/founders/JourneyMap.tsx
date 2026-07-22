@@ -141,7 +141,7 @@ export function JourneyMap() {
 
       {/* Content panel */}
       <div className="mt-14 min-h-[300px] md:mt-20">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={active}
             initial={{ opacity: 0, y: 8 }}

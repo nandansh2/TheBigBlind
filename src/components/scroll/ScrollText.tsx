@@ -7,7 +7,7 @@ import {
   useReducedMotion,
   type MotionValue,
 } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export type Line = {
   text: string;
@@ -36,10 +36,16 @@ function Word({
   reduce: boolean | null;
 }) {
   const opacity = useTransform(progress, range, [0.1, target]);
+  // Fail-open: the server renders words at full readable opacity. The ghost
+  // state is only applied once JS is running to drive the scroll animation,
+  // so a broken script leaves readable copy rather than near-invisible text.
+  const [live, setLive] = useState(false);
+  useEffect(() => setLive(true), []);
+
   return (
     <motion.span
       className="mr-[0.26em] inline-block"
-      style={reduce ? { opacity: target } : { opacity }}
+      style={reduce || !live ? { opacity: target } : { opacity }}
     >
       {word}
     </motion.span>

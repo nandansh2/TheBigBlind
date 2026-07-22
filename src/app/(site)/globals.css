@@ -170,8 +170,18 @@
 }
 
 @layer utilities {
-  /* Route fade-in. No fill-mode: the resting state is opacity 1, so if the
-     animation never runs the content is still visible. */
+  /* ------------------------------------------------------------------
+     FAIL-OPEN ANIMATION CONTRACT
+
+     Content is ALWAYS visible in its resting state. JavaScript opts *in* to
+     hiding an element before animating it back. If JS is absent, blocked, or
+     the animation library breaks, every element renders as normal text.
+
+     Never ship an element whose only path to being visible is an animation
+     completing. That caused two production blackouts.
+     ------------------------------------------------------------------ */
+
+  /* Route fade-in. Resting state is opacity 1. */
   .page-in {
     animation: page-in 0.25s ease-out;
   }
@@ -182,6 +192,38 @@
     to {
       opacity: 1;
     }
+  }
+
+  /* Mount rise — used for above-the-fold hero content. `both` holds the
+     from-state during the delay and the to-state after; if animations never
+     run at all, the element keeps its normal (visible) style. */
+  .rise {
+    animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Scroll reveal. Only JS adds these attributes, so the un-scripted state is
+     plain visible content. */
+  [data-reveal="pending"] {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 18px));
+  }
+  [data-reveal="shown"] {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0s);
   }
 
   .text-balance {

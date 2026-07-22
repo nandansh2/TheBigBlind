@@ -93,7 +93,7 @@ export function StageSelector() {
 
       {/* Cross-fading card */}
       <div className="mt-10 min-h-[320px]">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={active}
             initial={{ opacity: 0 }}

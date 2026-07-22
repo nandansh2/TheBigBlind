@@ -1,9 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ShaderAnimation } from "@/components/ui/shader-animation";
-import { EASE_EXPO } from "@/lib/motion";
 
+/**
+ * Hero. All entrance motion is CSS (`.rise`) rather than JS, so the copy is
+ * readable even if scripts never run — see the fail-open contract in globals.css.
+ */
 export function HomeHero() {
   const scrollToRoom = () => {
     document.getElementById("room")?.scrollIntoView({ behavior: "smooth" });
@@ -35,47 +37,38 @@ export function HomeHero() {
 
       {/* Content */}
       <div className="content-px relative z-10 flex w-full flex-col items-center text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE_EXPO }}
-          className="eyebrow"
-        >
-          Founders · Investors · VCs · Institutions
-        </motion.p>
+        <p className="eyebrow rise">Founders · Investors · VCs · Institutions</p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.1, ease: EASE_EXPO }}
-          style={{ textShadow: "0 2px 44px rgba(0,0,0,0.55)" }}
-          className="mt-8 max-w-[14ch] font-display text-[3.2rem] font-medium leading-[0.96] tracking-[-0.02em] text-bone sm:text-6xl md:text-[5.4rem] lg:text-[6.6rem]"
+        <h1
+          style={{
+            textShadow: "0 2px 44px rgba(0,0,0,0.55)",
+            animationDelay: "0.1s",
+          }}
+          className="rise mt-8 max-w-[14ch] font-display text-[3.2rem] font-medium leading-[0.96] tracking-[-0.02em] text-bone sm:text-6xl md:text-[5.4rem] lg:text-[6.6rem]"
         >
           The problem isn&rsquo;t the idea.{" "}
           <span className="italic">It&rsquo;s the room.</span>
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.28, ease: EASE_EXPO }}
-          style={{ textShadow: "0 1px 24px rgba(0,0,0,0.8)" }}
-          className="mt-9 max-w-xl text-base leading-relaxed text-bone/90 md:text-lg"
+        <p
+          style={{
+            textShadow: "0 1px 24px rgba(0,0,0,0.8)",
+            animationDelay: "0.28s",
+          }}
+          className="rise mt-9 max-w-xl text-base leading-relaxed text-bone/90 md:text-lg"
         >
           The Big Blind is a venture-building ecosystem built around one
           principle: the right conversation, with the right people, at the right
           time, changes everything.
-        </motion.p>
+        </p>
       </div>
 
-      {/* Corner apply card (CRED-style), scrolls to the scroll section */}
-      <motion.button
+      {/* Corner apply card, scrolls to the scroll section */}
+      <button
         type="button"
         onClick={scrollToRoom}
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.5, ease: EASE_EXPO }}
-        className="glass glass-hover group absolute bottom-8 right-6 z-10 flex items-center gap-4 rounded-[10px] px-6 py-4 text-left md:bottom-10 md:right-10"
+        style={{ animationDelay: "0.5s" }}
+        className="glass glass-hover group rise absolute bottom-8 right-6 z-10 flex items-center gap-4 rounded-[10px] px-6 py-4 text-left md:bottom-10 md:right-10"
       >
         <span className="flex flex-col">
           <span className="font-mono text-[0.62rem] uppercase tracking-label text-silver-dim">
@@ -88,15 +81,13 @@ export function HomeHero() {
         <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-silver-line text-bone transition-transform duration-500 ease-expo group-hover:translate-y-0.5">
           ↓
         </span>
-      </motion.button>
+      </button>
 
       {/* subtle centre scroll cue */}
       <div className="pointer-events-none absolute inset-x-0 bottom-8 flex justify-center">
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.35 }}
-          transition={{ delay: 1.1, duration: 1 }}
-          className="h-10 w-px bg-gradient-to-b from-silver/60 to-transparent"
+        <span
+          style={{ animationDelay: "1.1s" }}
+          className="rise h-10 w-px bg-gradient-to-b from-silver/60 to-transparent opacity-40"
         />
       </div>
     </section>

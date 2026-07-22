@@ -146,7 +146,7 @@ export function ReachOut() {
         </div>
 
         <div className="mt-10 min-h-[180px]">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={active}
               initial={{ opacity: 0 }}
@@ -170,7 +170,7 @@ export function ReachOut() {
       {/* Contact form */}
       <Section className="section-py border-t border-silver-line">
         <div className="mx-auto max-w-prose">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             {status === "success" ? (
               <motion.div
                 key="success"

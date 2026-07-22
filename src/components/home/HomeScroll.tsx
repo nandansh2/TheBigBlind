@@ -1,10 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Section, Eyebrow } from "@/components/primitives/Section";
 import { ScrollText, type Line } from "@/components/scroll/ScrollText";
 import { useMenu } from "@/components/nav/MenuContext";
-import { EASE_EXPO } from "@/lib/motion";
+import { Reveal } from "@/components/primitives/Reveal";
 
 const LINES: Line[] = [
   { text: "there are founders who never meet the right investor.", tone: "ghost" },
@@ -32,13 +31,7 @@ const LINES: Line[] = [
 function FindTableButton() {
   const { openMenu } = useMenu();
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 14 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
-      transition={{ duration: 0.7, ease: EASE_EXPO }}
-      className="mt-14"
-    >
+    <Reveal className="mt-14">
       <button
         type="button"
         onClick={openMenu}
@@ -52,7 +45,7 @@ function FindTableButton() {
           →
         </span>
       </button>
-    </motion.div>
+    </Reveal>
   );
 }
 
