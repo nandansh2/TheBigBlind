@@ -6,16 +6,16 @@
  * launch, the Node process never starts, and every request returns
  * 503 Service Unavailable even though `next build` succeeded.
  *
- * Passenger supplies the port to bind on via PORT.
+ * Passenger supplies the address to bind on via PORT. That may be a TCP port
+ * *or* a Unix socket path, so it is passed to listen() untouched — parsing it
+ * as an integer would break the socket case.
  */
 const { createServer } = require("http");
 const next = require("next");
 
-const port = parseInt(process.env.PORT || "3000", 10);
-const hostname = process.env.HOST || "0.0.0.0";
+const port = process.env.PORT || 3000;
 
-// Never run the dev compiler in the hosted environment.
-process.env.NODE_ENV = process.env.NODE_ENV || "production";
+if (!process.env.NODE_ENV) process.env.NODE_ENV = "production";
 
 const app = next({ dev: false, dir: __dirname });
 const handle = app.getRequestHandler();
@@ -23,14 +23,22 @@ const handle = app.getRequestHandler();
 app
   .prepare()
   .then(() => {
-    createServer((req, res) => {
-      handle(req, res).catch((err) => {
+    const server = createServer((req, res) => {
+      Promise.resolve(handle(req, res)).catch((err) => {
         console.error("Request failed:", req.url, err);
-        res.statusCode = 500;
+        if (!res.headersSent) res.statusCode = 500;
         res.end("Internal Server Error");
       });
-    }).listen(port, hostname, () => {
-      console.log(`Ready on http://${hostname}:${port}`);
+    });
+
+    server.on("error", (err) => {
+      console.error("HTTP server error:", err);
+      process.exit(1);
+    });
+
+    // No host argument: Passenger binds this for us.
+    server.listen(port, () => {
+      console.log("Next.js ready, listening on", port);
     });
   })
   .catch((err) => {
