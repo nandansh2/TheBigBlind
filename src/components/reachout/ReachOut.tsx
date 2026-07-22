@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useMemo, useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Section } from "@/components/primitives/Section";
 import { Glyph, type GlyphName } from "@/components/primitives/Glyph";
 import { SITE } from "@/lib/constants";
@@ -64,18 +64,20 @@ const labelClass =
   "mb-2 block font-mono text-[0.68rem] uppercase tracking-label text-silver-dim";
 
 /**
- * `initialPath` is resolved on the server from the ?path= query so this whole
- * section server-renders. Reading it with useSearchParams() instead would opt
- * the subtree out of prerendering, leaving the form (and the #apply anchor)
- * missing from the initial HTML.
+ * The ?path= deep link is applied after mount from window.location rather than
+ * with useSearchParams(). useSearchParams() would opt this subtree out of
+ * prerendering (losing the form and the #apply anchor from the HTML), and
+ * reading it on the server would force the whole route to render dynamically.
+ * This way the page stays fully static and the form is always in the HTML.
  */
-export function ReachOut({ initialPath }: { initialPath?: string }) {
-  const initial = useMemo(() => {
-    const found = PATHS.findIndex((x) => x.key === initialPath);
-    return found >= 0 ? found : 0;
-  }, [initialPath]);
+export function ReachOut() {
+  const [active, setActive] = useState(0);
 
-  const [active, setActive] = useState(initial);
+  useEffect(() => {
+    const key = new URLSearchParams(window.location.search).get("path");
+    const found = PATHS.findIndex((x) => x.key === key);
+    if (found >= 0) setActive(found);
+  }, []);
   const [role, setRole] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const path = PATHS[active];

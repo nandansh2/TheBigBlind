@@ -12,11 +12,7 @@ export const metadata: Metadata = pageMeta({
   path: "/reach-out",
 });
 
-export default function ReachOutPage({
-  searchParams,
-}: {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
+export default function ReachOutPage() {
   return (
     <>
       {/* Hero */}
@@ -68,7 +64,7 @@ export default function ReachOutPage({
       </Section>
 
       {/* Path selector + form (client, reads ?path=) */}
-      <ReachOut initialPath={typeof searchParams?.path === "string" ? searchParams.path : undefined} />
+      <ReachOut />
     </>
   );
 }
