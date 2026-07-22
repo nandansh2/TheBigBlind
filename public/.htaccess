@@ -1,0 +1,45 @@
+# Cache policy for the static build (Apache / LiteSpeed — Hostinger).
+#
+# Next.js normally sends `s-maxage=31536000` on prerendered pages, assuming the
+# CDN purges on deploy. Hostinger's CDN does not, which left edges serving
+# different builds of the site for days. HTML must therefore always revalidate.
+# Content-hashed build output stays immutable.
+
+<IfModule mod_headers.c>
+  # HTML documents — never cached by a shared cache.
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "public, max-age=0, s-maxage=0, must-revalidate"
+  </FilesMatch>
+
+  # Fingerprinted build assets — safe to cache forever.
+  <IfModule mod_rewrite.c>
+    SetEnvIf Request_URI "^/_next/static/" IMMUTABLE_ASSET=1
+    Header set Cache-Control "public, max-age=31536000, immutable" env=IMMUTABLE_ASSET
+  </IfModule>
+
+  # Images and fonts — cache for a week, they are stable but not fingerprinted.
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|svg|ico|woff2?)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+
+  # sitemap/robots should stay fresh.
+  <FilesMatch "^(robots\.txt|sitemap\.xml)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# Serve pretty URLs without the trailing slash (e.g. /founders -> /founders/index.html)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Never rewrite real files or directories — this keeps /our_deck intact.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # /founders -> /founders/index.html
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*)$ $1/index.html [L]
+</IfModule>
+
+ErrorDocument 404 /404.html
