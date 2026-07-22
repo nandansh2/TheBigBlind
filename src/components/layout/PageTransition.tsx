@@ -1,21 +1,21 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
-/** Subtle fade between routes — 200ms opacity on route change (brief §5.2). */
+/**
+ * Subtle fade between routes (brief §5.2).
+ *
+ * Deliberately CSS-driven rather than JS-driven. The element's resting state is
+ * fully visible and the keyframe only fades it IN, so if JS never runs — or the
+ * animation library fails — the page is still readable. Page-level visibility
+ * must never depend on an animation completing.
+ */
 export function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   return (
-    <motion.main
-      key={pathname}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
-      className="min-h-[60vh]"
-    >
+    <main key={pathname} className="page-in min-h-[60vh]">
       {children}
-    </motion.main>
+    </main>
   );
 }
