@@ -29,20 +29,35 @@ const STRATEGIC = [
     body: "Confederation of Global Goan Entrepreneurs. Regional ecosystem access and community infrastructure across industry and government.",
   },
   {
-    name: "KRG Ventures",
-    body: "Venture funding network and strategic capital connections. Direct access to institutional investor relationships.",
+    name: "VibrantGoa",
+    body: "Regional media and community platform amplifying Goa's entrepreneurial ecosystem and cultural network.",
   },
 ];
-
-const BENZAI = {
-  name: "Benzai10",
-  body: "Early-stage innovation and startup ecosystem support. Complementary to every stage of the founder journey.",
-};
 
 const TRUSTED = [
   { name: "Antler", body: "Global venture builder and early-stage investor." },
   { name: "Blume Ventures", body: "India-focused early stage venture capital." },
   { name: "CapitalCORN", body: "Angel network and early-stage capital access." },
+  {
+    name: "KRG Ventures",
+    body: "Venture funding network and strategic capital connections. Direct access to institutional investor relationships.",
+  },
+  {
+    name: "Benzai10",
+    body: "Early-stage innovation and startup ecosystem support. Complementary to every stage of the founder journey.",
+  },
+  {
+    name: "Venture Catalyst",
+    body: "Early-stage investor and incubator network expanding access to angel capital.",
+  },
+  {
+    name: "AtomXVII Venture Capital",
+    body: "Venture capital partner backing early-stage founders across the ecosystem.",
+  },
+  {
+    name: "Aeravti Ventures",
+    body: "Venture capital network supporting founders from first cheque through scale.",
+  },
 ];
 
 function PartnerCard({
@@ -109,9 +124,6 @@ export default function PartnersPage() {
             </Reveal>
           ))}
         </div>
-        <Reveal className="mt-5">
-          <PartnerCard {...BENZAI} />
-        </Reveal>
       </Section>
 
       {/* Trusted Network */}

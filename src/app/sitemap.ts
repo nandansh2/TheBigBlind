@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/investors", priority: 0.9, freq: "monthly" },
     { path: "/venture-capital", priority: 0.9, freq: "monthly" },
     { path: "/financial-institutions", priority: 0.9, freq: "monthly" },
+    { path: "/venture-building", priority: 0.9, freq: "monthly" },
     { path: "/partners", priority: 0.8, freq: "monthly" },
     { path: "/reach-out", priority: 0.8, freq: "monthly" },
     { path: "/waitlist", priority: 0.7, freq: "monthly" },

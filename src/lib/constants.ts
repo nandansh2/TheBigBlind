@@ -25,6 +25,7 @@ export const ROUTES = {
   financialInstitutions: "/financial-institutions",
   partners: "/partners",
   reachOut: "/reach-out",
+  ventureBuilding: "/venture-building",
 } as const;
 
 // "Where We Come In" audience segments — used in the menu grid and elsewhere.

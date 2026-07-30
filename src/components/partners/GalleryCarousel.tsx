@@ -13,6 +13,8 @@ const ROW_A: Shot[] = [
   { src: "/assets/gallery/nitesh-raghu-leptron.jpg", caption: "Nitesh Raghu · Leptron" },
   { src: "/assets/gallery/achal-gowda-regen.jpg", caption: "Achal Gowda · Regen & Co" },
   { src: "/assets/gallery/vaibhav-kubar-labs.jpg", caption: "Vaibhav · Kubar Labs" },
+  { src: "/assets/gallery/raghav-chopra-antler.jpg", caption: "Raghav Chopra · Antler" },
+  { src: "/assets/gallery/shubham-jhuria-aeravti-ventures.jpg", caption: "Shubham Jhuria · Aeravti Ventures" },
 ];
 
 const ROW_B: Shot[] = [
@@ -22,6 +24,7 @@ const ROW_B: Shot[] = [
   { src: "/assets/gallery/tbb-x-capitalcorn.jpg", caption: "The Big Blind × CapitalCORN" },
   { src: "/assets/gallery/tbb-x-benzai10.jpg", caption: "The Big Blind × Benzai10" },
   { src: "/assets/gallery/jury-at-isbm.jpg", caption: "Jury panel, ISBM" },
+  { src: "/assets/gallery/raghav-chopra-antler-2.jpg", caption: "Raghav Chopra · Antler" },
 ];
 
 function Row({

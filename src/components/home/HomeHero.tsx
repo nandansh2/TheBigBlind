@@ -3,13 +3,49 @@
 import Link from "next/link";
 import { ShaderAnimation } from "@/components/ui/shader-animation";
 
+/** Glass corner card used for the hero's two primary actions. */
+function CornerCard({
+  href,
+  eyebrow,
+  title,
+  delay,
+}: {
+  href: string;
+  eyebrow: string;
+  title: string;
+  delay: string;
+}) {
+  return (
+    <Link
+      href={href}
+      style={{ animationDelay: delay }}
+      className="glass glass-hover group rise flex w-full max-w-[20rem] items-center gap-4 rounded-[10px] px-6 py-4 text-left md:w-auto md:max-w-none"
+    >
+      <span className="flex flex-col">
+        <span className="font-mono text-[0.62rem] uppercase tracking-label text-silver-dim">
+          {eyebrow}
+        </span>
+        <span className="mt-1 max-w-[13rem] font-display text-lg leading-tight text-bone">
+          {title}
+        </span>
+      </span>
+      <span
+        aria-hidden
+        className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-silver-line text-bone transition-transform duration-500 ease-expo group-hover:translate-x-0.5"
+      >
+        →
+      </span>
+    </Link>
+  );
+}
+
 /**
  * Hero. All entrance motion is CSS (`.rise`) rather than JS, so the copy is
  * readable even if scripts never run — see the fail-open contract in globals.css.
  */
 export function HomeHero() {
   return (
-    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden">
+    <section className="relative flex flex-col overflow-hidden md:min-h-[100dvh]">
       {/* Shader light-field background */}
       <div className="absolute inset-0">
         <ShaderAnimation className="h-full w-full" />
@@ -33,7 +69,7 @@ export function HomeHero() {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-ink" />
 
       {/* Content */}
-      <div className="content-px relative z-10 flex w-full flex-col items-center text-center">
+      <div className="content-px relative z-10 flex w-full flex-col items-center justify-center pt-32 pb-4 text-center md:flex-1 md:pt-0 md:pb-0">
         <p className="eyebrow rise">Founders · Investors · VCs · Institutions</p>
 
         <h1
@@ -60,30 +96,25 @@ export function HomeHero() {
         </p>
       </div>
 
-      {/* Corner apply card — deep-links to the application form on /reach-out */}
-      <Link
-        href="/reach-out#apply"
-        style={{ animationDelay: "0.5s" }}
-        className="glass glass-hover group rise absolute bottom-8 right-6 z-10 flex items-center gap-4 rounded-[10px] px-6 py-4 text-left md:bottom-10 md:right-10"
-      >
-        <span className="flex flex-col">
-          <span className="font-mono text-[0.62rem] uppercase tracking-label text-silver-dim">
-            by application only
-          </span>
-          <span className="mt-1 font-display text-lg text-bone">
-            apply to join the waitlist
-          </span>
-        </span>
-        <span
-          aria-hidden
-          className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-silver-line text-bone transition-transform duration-500 ease-expo group-hover:translate-x-0.5"
-        >
-          →
-        </span>
-      </Link>
+      {/* Action cards — programme (left) and application (right) on desktop;
+          centred and stacked between the hero and the next section on mobile. */}
+      <div className="relative z-10 mt-8 mb-12 flex w-full flex-col items-center gap-4 px-6 md:absolute md:inset-x-10 md:bottom-10 md:mb-0 md:mt-0 md:w-auto md:flex-row md:items-end md:justify-between md:gap-0 md:px-0">
+        <CornerCard
+          href="/venture-building"
+          eyebrow="the programme"
+          title="Our Venture Building Programme"
+          delay="0.42s"
+        />
+        <CornerCard
+          href="/reach-out#apply"
+          eyebrow="by application only"
+          title="apply to join the waitlist"
+          delay="0.5s"
+        />
+      </div>
 
-      {/* subtle centre scroll cue */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-8 flex justify-center">
+      {/* subtle centre scroll cue — desktop only; on mobile the cards sit here */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-8 hidden justify-center md:flex">
         <span
           style={{ animationDelay: "1.1s" }}
           className="rise h-10 w-px bg-gradient-to-b from-silver/60 to-transparent opacity-40"

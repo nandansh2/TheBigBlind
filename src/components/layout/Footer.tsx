@@ -1,4 +1,5 @@
 import { SITE } from "@/lib/constants";
+import { Icon } from "@/components/primitives/Icon";
 
 export function Footer() {
   return (
@@ -21,6 +22,15 @@ export function Footer() {
             className="transition-colors hover:text-bone"
           >
             {SITE.instagramHandle}
+          </a>
+          <a
+            href={SITE.youtube}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 transition-colors hover:text-bone"
+          >
+            <Icon name="microphone" size={13} />
+            <span>Podcast</span>
           </a>
         </div>
       </div>
