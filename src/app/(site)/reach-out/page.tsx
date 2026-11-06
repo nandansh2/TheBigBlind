@@ -29,6 +29,8 @@ export default function ReachOutPage() {
       {/* Before you apply */}
       <Section>
         <EmberCard
+          fluid
+          className="ember-wide"
           top={<Label>Before you apply</Label>}
           statement="Access to The Big Blind is paid. Then it is vetted."
           foot="You are applying for a seat at a curated table where every member has been reviewed and accepted deliberately. The fee is not a barrier — it is a signal that you are serious."

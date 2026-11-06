@@ -64,6 +64,8 @@ export function AudiencePage({ data }: { data: AudienceData }) {
       {/* Elite circle — the one ember statement */}
       <Section>
         <EmberCard
+          fluid
+          className="ember-wide"
           top={<Label>By invitation</Label>}
           statement={data.elite.headline}
           foot={data.elite.body}

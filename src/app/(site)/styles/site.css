@@ -51,7 +51,7 @@
   display: grid;
   place-items: center;
   min-height: 92px;
-  padding: var(--space-5) var(--space-4);
+  padding: var(--space-6) var(--space-4);
   border-radius: var(--radius-md);
   background: var(--paper);
   transition: transform var(--duration-sm) var(--ease-out), box-shadow var(--duration-sm) var(--ease-out);
@@ -243,14 +243,14 @@
 .edge-card__title { font: 300 clamp(24px, 3vw, 32px)/1.08 var(--font-sans); letter-spacing: -0.03em; margin: var(--space-3) 0 0; text-wrap: balance; }
 .edge-card__body { margin-top: var(--space-4); font: 400 15px/23px var(--font-sans); color: currentColor; opacity: 0.84; }
 .edge-card__body p { margin: 0; }
-.edge-card__meta { margin: auto 0 0; padding-top: var(--space-5); font: 500 12px/1.5 var(--font-mono); letter-spacing: 0.02em; color: currentColor; opacity: 0.72; }
+.edge-card__meta { margin: auto 0 0; padding-top: var(--space-6); font: 500 12px/1.5 var(--font-mono); letter-spacing: 0.02em; color: currentColor; opacity: 0.72; }
 /* On the paper block the night tabs read correctly; on blind/night, lighten them. */
 .edge-card--blind .tbb-edge-tabs span, .edge-card--night .tbb-edge-tabs span { background: var(--table); opacity: 0.85; }
 
 /* Gap register: issue -> work -> evidence. */
 .gap-grid { display: grid; gap: var(--space-4); grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 768px) { .gap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); } }
-.gap-card { padding: var(--space-5); border-radius: var(--radius-md); border: var(--stroke-hairline) solid var(--line); background: var(--felt); transition: border-color var(--duration-xs) var(--ease-out), transform var(--duration-sm) var(--ease-out); }
+@media (min-width: 768px) { .gap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); } }
+.gap-card { padding: var(--space-6); border-radius: var(--radius-md); border: var(--stroke-hairline) solid var(--line); background: var(--felt); transition: border-color var(--duration-xs) var(--ease-out), transform var(--duration-sm) var(--ease-out); }
 .gap-card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
 .gap-card__head { font: 500 16px/22px var(--font-sans); color: var(--ink); margin: 0; }
 .gap-card__work { margin: var(--space-3) 0 0; font: 400 14px/21px var(--font-sans); color: var(--ink-muted); }
@@ -259,7 +259,7 @@
 /* Materials / deliverables grid (icon-free, text-led). */
 .deliv-grid { display: grid; gap: var(--space-4); grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 640px) { .deliv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.deliv { padding: var(--space-5); border-radius: var(--radius-md); border: var(--stroke-hairline) solid var(--line); background: var(--felt); }
+.deliv { padding: var(--space-6); border-radius: var(--radius-md); border: var(--stroke-hairline) solid var(--line); background: var(--felt); }
 .deliv__name { display: flex; align-items: center; gap: var(--space-3); font: 500 16px/22px var(--font-sans); color: var(--ink); margin: 0; }
 .deliv__dot { width: 7px; height: 7px; border-radius: 2px; background: var(--blind); flex: none; }
 .deliv__desc { margin: var(--space-3) 0 0; font: 400 14px/21px var(--font-sans); color: var(--ink-muted); }
@@ -267,8 +267,8 @@
 /* Numbered step list (How to join). */
 .steps { display: grid; gap: var(--space-4); grid-template-columns: minmax(0, 1fr); counter-reset: step; }
 @media (min-width: 768px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.step { position: relative; padding: var(--space-5) var(--space-5) var(--space-5) calc(var(--space-6) + 40px); border-radius: var(--radius-md); border: var(--stroke-hairline) solid var(--line); background: var(--felt); }
-.step__n { position: absolute; left: var(--space-5); top: var(--space-5); font: 300 28px/1 var(--font-sans); letter-spacing: -0.03em; color: var(--blind); }
+.step { position: relative; padding: var(--space-6) var(--space-6) var(--space-6) calc(var(--space-6) + 40px); border-radius: var(--radius-md); border: var(--stroke-hairline) solid var(--line); background: var(--felt); }
+.step__n { position: absolute; left: var(--space-6); top: var(--space-6); font: 300 28px/1 var(--font-sans); letter-spacing: -0.03em; color: var(--blind); }
 .step__name { font: 500 15px/21px var(--font-sans); color: var(--ink); margin: 0; }
 .step__desc { margin: var(--space-2) 0 0; font: 400 14px/20px var(--font-sans); color: var(--ink-muted); }
 
@@ -276,8 +276,23 @@
 .split-2 { display: grid; gap: var(--space-6); grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 768px) { .split-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
+/* Full-width ember banner (overrides the DS square ember for statement bands). */
+.tbb-ember.ember-wide {
+  width: 100%;
+  aspect-ratio: auto;
+  min-height: 0;
+  grid-template-rows: auto auto auto;
+  gap: var(--space-6);
+  padding: var(--space-12) var(--space-10);
+}
+@media (min-width: 768px) { .tbb-ember.ember-wide { padding: var(--space-16) var(--space-12); } }
+.ember-wide .tbb-ember__top { justify-content: flex-start; }
+.ember-wide .tbb-ember__inner { align-items: flex-start; justify-content: center; text-align: left; overflow: visible; }
+.ember-wide .tbb-ember__statement { font: 300 clamp(28px, 4vw, 46px)/1.04 var(--font-sans); max-width: 18ch; }
+.ember-wide .tbb-ember__foot { text-align: left; white-space: normal; overflow: visible; text-overflow: clip; max-width: 64ch; line-height: 1.7; }
+
 /* ========== Vision manifesto ========== */
-.manifesto { margin-top: var(--space-10); max-width: 22ch; display: flex; flex-direction: column; gap: var(--space-5); }
+.manifesto { margin-top: var(--space-10); max-width: 22ch; display: flex; flex-direction: column; gap: var(--space-6); }
 @media (min-width: 768px) { .manifesto { max-width: 30ch; } }
 .manifesto__line { margin: 0; font: 300 clamp(22px, 3vw, 30px)/1.3 var(--font-sans); letter-spacing: -0.02em; text-wrap: balance; }
 .manifesto__line--ghost { color: var(--ink-faint); }
@@ -314,7 +329,7 @@
 .reach-field .tbb-field__control { max-width: none; }
 .reach-grid-2 { display: grid; gap: var(--space-6); grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 560px) { .reach-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.reach-foot { margin-top: var(--space-2); padding-top: var(--space-6); border-top: var(--stroke-hairline) solid var(--line); display: flex; flex-direction: column; gap: var(--space-5); }
+.reach-foot { margin-top: var(--space-2); padding-top: var(--space-6); border-top: var(--stroke-hairline) solid var(--line); display: flex; flex-direction: column; gap: var(--space-6); }
 @media (min-width: 640px) { .reach-foot { flex-direction: row; align-items: center; justify-content: space-between; } }
 .reach-foot__note { margin: 0; max-width: 34ch; font: 500 11px/1.6 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); }
 .reach-foot .tbb-btn { flex: none; }
@@ -323,7 +338,7 @@
 .reach-secondary a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line-strong); transition: text-decoration-color var(--duration-xs) var(--ease-out); }
 .reach-secondary a:hover { text-decoration-color: var(--blind); }
 
-.reach-success { max-width: 560px; margin-inline: auto; text-align: center; padding: var(--space-12) var(--space-6); display: flex; flex-direction: column; align-items: center; gap: var(--space-5); border: var(--stroke-hairline) solid var(--line); border-radius: var(--radius-md); background: var(--felt); }
+.reach-success { max-width: 560px; margin-inline: auto; text-align: center; padding: var(--space-12) var(--space-6); display: flex; flex-direction: column; align-items: center; gap: var(--space-6); border: var(--stroke-hairline) solid var(--line); border-radius: var(--radius-md); background: var(--felt); }
 .reach-success__mark { font-size: 48px; display: inline-flex; filter: drop-shadow(var(--blind-glow)); }
 .reach-email { font: 500 12px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); text-decoration: none; margin-top: var(--space-2); }
 .reach-email:hover { color: var(--ink); }
