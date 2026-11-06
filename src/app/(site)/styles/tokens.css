@@ -1,0 +1,134 @@
+/* The Big Blind: design tokens. Generated from the design system's tokens.json.
+   Integration notes (kept in sync with the system, see HANDOFF.md):
+   - The three --font-* families are provided by next/font in layout.tsx, so they are
+     intentionally omitted here to avoid overriding the optimised font variables.
+   - The generated type-utility classes (.display-*, .body, .label, ...) are omitted:
+     tbb.css ships the prefixed .tbb-* equivalents, and the unprefixed names collide.
+     (Source bug to fix in tokens.json generation: those rules also emit a doubled "}}".)
+*/
+
+:root, [data-theme="dark"] {
+  color-scheme: dark;
+  --table: #0a0a0a;
+  --felt: #141414;
+  --felt-2: #1f1f1f;
+  --line: #262626;
+  --line-strong: #3d3d3d;
+  --ink: #f5f5f3;
+  --ink-muted: #a3a3a0;
+  --ink-faint: #868682;
+  --blind: #f2224d;
+  --blind-strong: #e01845;
+  --blind-text: #ff4d6d;
+  --on-blind: #ffffff;
+  --ember: #5a0a14;
+  --ember-deep: #1a0306;
+  --night: #181818;
+  --on-night: #f5f5f3;
+  --on-night-muted: #a3a3a0;
+  --paper: #f4f4f2;
+  --on-paper: #0a0a0a;
+  --bezel: #000000;
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-line: rgba(255, 255, 255, 0.14);
+  --glass-sheen: rgba(255, 255, 255, 0.22);
+  --glass-soft: rgba(255, 255, 255, 0.03);
+  --glass-strong: rgba(20, 20, 20, 0.62);
+  --scrim: rgba(0, 0, 0, 0.55);
+  --media-scrim: rgba(0, 0, 0, 0.62);
+  --focus: #f2224d;
+  --error: #ff7a4d;
+  --error-frosted: rgba(255, 122, 77, 0.12);
+  --warning: #f5b33d;
+  --warning-frosted: rgba(245, 179, 61, 0.12);
+  --success: #4fd18b;
+  --success-frosted: rgba(79, 209, 139, 0.12);
+  --info: #8fb8ff;
+  --info-frosted: rgba(143, 184, 255, 0.12);
+  --card-float: 0 30px 60px -24px rgba(0, 0, 0, 0.7);
+  --blind-glow: 0 0 80px 0 rgba(242, 34, 77, 0.35);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --table: #f4f4f2;
+  --felt: #ffffff;
+  --felt-2: #ebebe8;
+  --line: #dcdcd8;
+  --line-strong: #b8b8b2;
+  --ink: #0a0a0a;
+  --ink-muted: #5c5c58;
+  --ink-faint: #6e6e69;
+  --blind: #f2224d;
+  --blind-strong: #e01845;
+  --blind-text: #d6143c;
+  --on-blind: #ffffff;
+  --ember: #5a0a14;
+  --ember-deep: #1a0306;
+  --night: #141414;
+  --on-night: #f5f5f3;
+  --on-night-muted: #a3a3a0;
+  --paper: #f4f4f2;
+  --on-paper: #0a0a0a;
+  --bezel: #000000;
+  --glass: rgba(255, 255, 255, 0.55);
+  --glass-line: rgba(10, 10, 10, 0.10);
+  --glass-sheen: rgba(255, 255, 255, 0.85);
+  --glass-soft: rgba(255, 255, 255, 0.35);
+  --glass-strong: rgba(255, 255, 255, 0.78);
+  --scrim: rgba(10, 10, 10, 0.45);
+  --media-scrim: rgba(0, 0, 0, 0.62);
+  --focus: #d6143c;
+  --error: #b93a0a;
+  --error-frosted: rgba(185, 58, 10, 0.08);
+  --warning: #8a5300;
+  --warning-frosted: rgba(138, 83, 0, 0.08);
+  --success: #177a43;
+  --success-frosted: rgba(23, 122, 67, 0.08);
+  --info: #2257b3;
+  --info-frosted: rgba(34, 87, 179, 0.08);
+  --card-float: 0 24px 48px -24px rgba(10, 10, 10, 0.25);
+  --blind-glow: 0 0 60px 0 rgba(242, 34, 77, 0.22);
+}
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --radius-tile: 4px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-card: 20px;
+  --radius-device: 40px;
+  --radius-pill: 999px;
+  --blur-soft: 8px;
+  --blur-glass: 20px;
+  --blur-strong: 32px;
+  --stroke-hairline: 1px;
+  --stroke-art: 1.25px;
+  --stroke-outline-numeral: 1.5px;
+  --duration-xs: 120ms;
+  --duration-sm: 250ms;
+  --duration-md: 400ms;
+  --duration-lg: 600ms;
+  --duration-xl: 1200ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --container-max: 1280px;
+  --measure: 68ch;
+  --measure-lead: 44ch;
+  --tap-min: 44px;
+  --nav-height: 60px;
+}

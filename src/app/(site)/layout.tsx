@@ -1,47 +1,45 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Manrope, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
-import { MenuProvider } from "@/components/nav/MenuContext";
-import { Navbar } from "@/components/nav/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { PageTransition } from "@/components/layout/PageTransition";
+import { Inter, IBM_Plex_Mono, Fraunces } from "next/font/google";
+import "./styles/tokens.css";
+import "./styles/tbb.css";
+import "./styles/site.css";
+import { Nav } from "@/components/ds/Nav";
+import { Footer } from "@/components/ds/Footer";
 import { SITE } from "@/lib/constants";
 import { OG_IMAGE } from "@/lib/seo";
 
-// Display — Fraunces: a soft, high-personality luxury serif used with restraint
-// (hero + literary scroll lines + titles only). Deliberately not a Didone.
-const display = Fraunces({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "900"],
-  style: ["normal", "italic"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-// Body/UI — Manrope: clean geometric sans carrying the bulk of the text.
-const body = Manrope({
+// The Big Blind design system type families, mapped to the system's --font-* variables.
+// Inter light carries the display sizes; IBM Plex Mono the labels; Fraunces italic the rare quote.
+const sans = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-body",
+  variable: "--font-sans",
   display: "swap",
 });
 
-// Utility — JetBrains Mono: small technical eyebrows and labels only.
-const mono = JetBrains_Mono({
+const mono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-mono",
   display: "swap",
 });
 
+const serif = Fraunces({
+  subsets: ["latin"],
+  weight: ["300", "400"],
+  style: ["italic"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://thebigblind.club"),
   title: {
-    default: "The Big Blind — The Right Table. The Right People. The Right Bets.",
+    default: "The Big Blind — Right people. Same room.",
     template: "%s · The Big Blind",
   },
   description:
-    "The Big Blind is a venture-building ecosystem connecting founders, investors, VCs, and financial institutions. One curated table. Every introduction earned.",
+    "The Big Blind is a venture-building firm. We build businesses investors believe in, and connect founders to the capital and network that get them there.",
   keywords: [
     "venture building",
     "founders",
@@ -56,9 +54,9 @@ export const metadata: Metadata = {
   applicationName: "The Big Blind",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "The Big Blind — The Right Table. The Right People. The Right Bets.",
+    title: "The Big Blind — Right people. Same room.",
     description:
-      "A venture-building ecosystem. One curated table. Every introduction earned. Not everyone gets in.",
+      "A venture-building firm. We build businesses investors believe in, from first pitch to first cheque.",
     url: "/",
     siteName: "The Big Blind",
     locale: "en_IN",
@@ -68,8 +66,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "The Big Blind",
-    description:
-      "A venture-building ecosystem. One curated table. Every introduction earned.",
+    description: "A venture-building firm. Right people. Same room.",
     images: [OG_IMAGE.url],
   },
   robots: {
@@ -87,23 +84,19 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0B0B0D",
+  themeColor: "#0a0a0a",
   width: "device-width",
   initialScale: 1,
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      data-theme="dark"
+      className={`${sans.variable} ${mono.variable} ${serif.variable}`}
     >
-      <body className="antialiased">
-        {/* Organization structured data for search engines */}
+      <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -114,7 +107,7 @@ export default function RootLayout({
               url: "https://thebigblind.club",
               slogan: SITE.tagline,
               description:
-                "A venture-building ecosystem connecting founders, investors, VCs, and financial institutions.",
+                "A venture-building firm connecting founders, investors, VCs and financial institutions.",
               email: SITE.email,
               telephone: SITE.phone,
               founder: [
@@ -125,19 +118,12 @@ export default function RootLayout({
             }),
           }}
         />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-bone focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:tracking-label focus:text-ink"
-        >
+        <a href="#main" className="skip-link">
           Skip to content
         </a>
-        <MenuProvider>
-          <Navbar />
-          <div id="main">
-            <PageTransition>{children}</PageTransition>
-          </div>
-          <Footer />
-        </MenuProvider>
+        <Nav />
+        <main id="main">{children}</main>
+        <Footer />
       </body>
     </html>
   );

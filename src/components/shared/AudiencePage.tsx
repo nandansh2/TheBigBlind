@@ -1,12 +1,11 @@
-import { Section, Breadcrumb } from "@/components/primitives/Section";
-import { Glyph } from "@/components/primitives/Glyph";
-import { Reveal } from "@/components/primitives/Reveal";
-import { OfferingsGrid, EliteSuitsCard, type Offering } from "./Offerings";
-import { CTASection } from "./CTASection";
-import type { Suit } from "@/lib/constants";
+import { Section, Label, ButtonLink, Suit } from "@/components/ds/primitives";
+import { EmberCard } from "@/components/ds/cards";
+import type { Suit as SuitName } from "@/lib/constants";
+
+export type Offering = { icon?: string; title: string; body: string };
 
 export type AudienceData = {
-  suit: Suit;
+  suit: SuitName;
   title: string;
   declaration: string;
   sub: string;
@@ -15,46 +14,79 @@ export type AudienceData = {
   cta: { line1: string; line2: string; button: string; href: string };
 };
 
+/* Audience landing (Investors / Venture Capital / Financial Institutions), on the
+   design system. Hero claim + offerings grid + a single ember statement + CTA. */
 export function AudiencePage({ data }: { data: AudienceData }) {
   return (
     <>
       {/* Hero */}
-      <Section className="pt-36 pb-16 md:pt-48 md:pb-24">
-        <Reveal>
-          <Breadcrumb>Where We Come In</Breadcrumb>
-        </Reveal>
-        <Reveal delay={0.08}>
-          <div className="mt-10 flex items-center gap-5">
-            <Glyph name={data.suit} size={52} />
-            <h1 className="font-display text-5xl text-bone md:text-7xl">
-              {data.title}
-            </h1>
-          </div>
-        </Reveal>
-        <Reveal delay={0.16}>
-          <p className="mt-10 max-w-3xl font-display text-2xl italic leading-snug text-bone md:text-3xl">
-            {data.declaration}
+      <Section className="home-hero">
+        <div className="section-head__eyebrow">
+          <Label>Where we come in</Label>
+        </div>
+        <div style={{ maxWidth: "var(--measure)", marginTop: "var(--space-6)" }}>
+          <h1 className="tbb-headline tbb-display-xl" style={{ display: "flex", alignItems: "center", gap: "var(--space-5)", flexWrap: "wrap" }}>
+            <span style={{ fontSize: "0.7em", color: "var(--ink-muted)", display: "inline-flex" }}>
+              <Suit name={data.suit} />
+            </span>
+            {data.title}
+          </h1>
+          <p className="tbb-lead" style={{ marginTop: "var(--space-8)" }}>
+            <b>{data.declaration}</b>
           </p>
-        </Reveal>
-        <Reveal delay={0.24}>
-          <p className="mt-8 max-w-readable leading-relaxed text-bone-muted md:text-lg">
+          <p className="tbb-lead" style={{ marginTop: "var(--space-5)", color: "var(--ink-muted)" }}>
             {data.sub}
           </p>
-        </Reveal>
+        </div>
       </Section>
 
-      {/* Offerings + Elite Suits */}
-      <Section className="pb-16 md:pb-24">
-        <OfferingsGrid items={data.offerings} />
-        <EliteSuitsCard headline={data.elite.headline} body={data.elite.body} />
+      {/* Offerings */}
+      <Section>
+        <div className="section-head">
+          <div className="section-head__eyebrow">
+            <Label>What you get</Label>
+          </div>
+          <h2 className="tbb-headline tbb-display-m">A room built around you.</h2>
+        </div>
+        <div className="deliv-grid">
+          {data.offerings.map((o) => (
+            <div key={o.title} className="deliv">
+              <p className="deliv__name">
+                <span className="deliv__dot" />
+                {o.title}
+              </p>
+              <p className="deliv__desc">{o.body}</p>
+            </div>
+          ))}
+        </div>
       </Section>
 
-      <CTASection
-        line1={data.cta.line1}
-        line2={data.cta.line2}
-        button={data.cta.button}
-        href={data.cta.href}
-      />
+      {/* Elite circle — the one ember statement */}
+      <Section>
+        <EmberCard
+          top={<Label>By invitation</Label>}
+          statement={data.elite.headline}
+          foot={data.elite.body}
+        />
+      </Section>
+
+      {/* CTA */}
+      <Section>
+        <div className="section-head" style={{ marginBottom: 0 }}>
+          <div className="section-head__eyebrow">
+            <Label>Take your seat</Label>
+          </div>
+          <h2 className="tbb-headline tbb-display-l">
+            {data.cta.line1}
+            <span className="tbb-accent">{data.cta.line2}</span>
+          </h2>
+          <div className="home-hero__cta" style={{ marginTop: "var(--space-6)" }}>
+            <ButtonLink href={data.cta.href} variant="blind" withArrow>
+              {data.cta.button}
+            </ButtonLink>
+          </div>
+        </div>
+      </Section>
     </>
   );
 }
